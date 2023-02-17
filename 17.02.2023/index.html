@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+<!-- 1. Сортировка массива методом "пузырька" -->
+
+    <script>
+
+        let userInput = prompt("Введите значение через запятую");
+        let userArray = userInput.split(",");
+        userArray = userArray.map(Number);
+
+        let resultArray = bubbleSort(userArray);
+        document.write(resultArray.join(", "));
+
+        function bubbleSort(array) {
+            let sorted;
+            do {
+                sorted = true;
+                for (let i=1; i<array.length; i++) {
+                    if (array[i] < array[i-1]) {
+                        let tmp = array[i-1];
+                        array[i-1] = array[i];
+                        array[i] = tmp;
+                        sorted = false;
+                    }
+                }
+            } while (!sorted);
+            return array;
+        }
+
+
+    </script>
+
+     
+    
+</body>
+</html>
