@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!-- 6.	Ипотека. Спросите у пользователя стоимость квартиры, которую он хочет приобрести, процентную ставку банка и количество лет, за которое он собирается выплатить эту ипотеку. Считаем, что проценты начисляются каждый месяц. Рассчитать и вывести ежемесячный платёж по кредиту(с учётом процентов), размер последнего платежа и общую сумму переплаты за кредит.-->
+
+     <script>
+
+        let apartmentCost = prompt("Введите стоимость квартиры: ");
+        let interestRate = prompt("Введите процентную ставку банка: ");
+        let years = prompt("Введите количество лет: ");
+        let months = years * 12;
+
+        if (isNaN(apartmentCost) || isNaN(interestRate) || isNaN(years)) {
+            alert("Введены некорректные данные");
+        } else {
+        let loanAmount = apartmentCost;
+        let monthlyInterestRate = (interestRate / 100) / 12;
+        let monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - (1 + monthlyInterestRate) ** (-months));
+        let totalPayment = monthlyPayment * months;
+        let overpayment = totalPayment - apartmentCost;
+
+        for (let i = 1; i <= months; i++) {
+            let interest = loanAmount * monthlyInterestRate;
+            let principal = monthlyPayment - interest;
+            loanAmount -= principal;
+            if (i == months) {
+            monthlyPayment += loanAmount;
+            }
+            document.write(`Месяц ${i}: Платеж - ${monthlyPayment.toFixed(2)} тенге, Основной долг - ${principal.toFixed(2)} тенге, Проценты - ${interest.toFixed(2)} тенге, Остаток долга - ${loanAmount.toFixed(2)} тенге <br>`);
+        }
+
+            document.write(`Общая сумма переплаты за кредит составит ${overpayment.toFixed(2)} тенге`);
+        }
+      
+    </script>
+
+     
+    
+</body>
+</html>

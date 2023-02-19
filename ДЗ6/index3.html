@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--3.	Создать массив из 10 чисел, используя только один prompt. Если пользователь ввёл больше 10 элементов, удалить лишнее. Если меньше - сообщить ему об этом и попросить ввести данные снова. Сохранить во второй массив только те значения первого массива, которые являются четными.-->
+
+    <script>
+
+        let userInput;
+        let numbers = [];
+
+        do {
+            userInput = prompt('Введите 10 чисел через запятую', '');
+            if (userInput) {
+            numbers = userInput.split(',').slice(0, 10).map(str => parseInt(str.trim()));
+            }
+        } while (numbers.length < 10);
+
+        const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+        document.write(`Введенный массив: ${numbers}`,'<br>');
+        document.write(`Четные элементы массива: ${evenNumbers}`);
+
+    </script>
+
+ 
+    
+</body>
+</html>

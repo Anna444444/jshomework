@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!-- 5.	Резюме. Спросите у пользователя его ФИО. Затем в цикле спрашивайте, в каком году он начал работать, в каком году уволился, и как называлось это место работы. Если пользователь не ввёл ничего, прервите цикл, и напечатайте в браузере его резюме, а в конце укажите, сколько лет составляет его общий стаж работы.-->
+
+     <script>
+
+        let fullName = prompt("Введите свое ФИО");
+        let resume = "";
+        let totalYearsOfWork = 0 ;
+        let startYear, endYear, companyName;
+        while (true) {
+            companyName = prompt("Как называлось это место работы?");
+            if (!companyName) {
+                break;
+            }
+            startYear = parseInt(prompt("В каком году вы начали работать?"));
+        if (isNaN(startYear)) {
+            alert("Пожалуйста, введите год в виде числа");
+            continue;
+        }
+
+        endYear = parseInt(prompt("В каком году вы уволились?"));
+        if (isNaN(endYear)) {
+            alert("Пожалуйста, введите год в виде числа");
+            continue;
+        }
+
+
+        resume += `${startYear}-${endYear}: ${companyName}\n`;
+        totalYearsOfWork += endYear - startYear;
+        }
+
+        alert(`Резюме:\n${fullName}\n${resume}Общий стаж работы: ${totalYearsOfWork} лет`);
+               
+    </script>
+
+        
+    
+</body>
+</html>

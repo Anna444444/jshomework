@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 3.	Пользователь вводит число любой длины. Вывести сумму всех цифр в числе и их произведение. -->
+
+
+    <script>
+        let number = Number(prompt('ваше число'));
+        let posled_cifra = 0;
+        let summa = 0;
+        let umnoshenie = 1;
+        let count = 0;
+
+        while (number != 0){
+            posled_cifra = number % 10;
+            summa += posled_cifra;
+            umnoshenie *= posled_cifra;
+            number = Math.floor(number / 10);
+            count++;
+        }
+
+        if (count != 0){
+            alert(`сумма чисел равна: ${summa} их произведение равно: ${umnoshenie}`);
+        }else{
+            alert(`сумма чисел равна: ${summa} их произведение равно: ${0}`);
+        }  
+        
+    </script>
+
+
+</body>
+</html>

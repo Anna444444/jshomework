@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 2.	Угадай число. Сгенерируйте случайное целое число от 1 до 100. Предложите пользователю угадать его за 7 попыток. Если загаданное число больше, чем то что предположил пользователь, сообщите ему: «больше». Если меньше – «меньше». Если пользователь угадал, сообщите ему, за сколько попыток у него это получилось. -->
+
+    <script>
+        let rand = Math.floor(1 + Math.random() * (100 + 1 - 1));
+        let popitka = 1;
+
+        for(let i = 1; i<= 7; i ++){
+            let number = Number(prompt('ваше число'));
+
+            if (rand == number){
+                break;
+            }else if (rand > number){
+                alert('больше');
+            }else if (rand < number){
+                alert('меньше');
+            }
+            popitka++
+        }
+
+        if (popitka <= 7){
+            alert(`Поздравляем вы угадали число за: ${popitka} попыток`);
+        }else{
+            alert('Вы не угадали число');
+
+        }
+
+    </script>
+    
+
+    
+</body>
+</html>

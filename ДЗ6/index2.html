@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--2.	Создать 2 массива из 7 чисел. Сравнить значения в массиве по очереди (0-й элемент первого массива с 0-м элементом второго и т.д.) и выводить информацию в документ.-->
+
+    <script>
+
+        let array1 = [1, 5, 9, 14, 19, 25, 33];
+        let array2 = [3, 5, 15, 10, 18, 25, 9];
+        let i = 0;
+
+        while (i < 7 ){
+            if (array1[i] > array2[i]){
+                document.write(`${array1[i]} > ${array2[i]}`,'<br>')
+            }else if (array1[i] < array2[i]){
+                document.write(`${array2[i]} > ${array1[i]}`,'<br>')
+            }else{
+                document.write(`${array2[i]} = ${array1[i]}`,'<br>')
+            }
+            i++
+        }
+    
+    </script>
+
+ 
+    
+</body>
+</html>

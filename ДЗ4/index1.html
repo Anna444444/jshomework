@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 1.	Орёл-решка. Спросите у пользователя: «Орёл или Решка? Ваша ставка:». Пользователь вводит свой вариант. Затем с помощью функции Math.random() сгененируйте случайное число: 0 – «орёл», 1 – «решка». Сообщите пользователю, угадал ли он, и предложите сыграть ещё раз. И так – до тех пор, пока он не откажется. В конце выведите информацию о том, сколько раз сыграл пользователь, и сколько раз он угадал. -->
+
+    <script>
+        let win = 0;
+        let lose = 0;
+        let game = 0; 
+
+        do {
+            let moneta = prompt('Орёл или Решка? Ваша ставка:');
+            let rand = Math.floor(0 + Math.random() * (1 + 1 - 0));
+            let orel = 0;
+            let rehka = 0;
+            game ++;
+
+            if (rand == 1 && moneta == 'Орёл'){
+                orel++
+            }else if (rand == 0 && moneta == 'Решка') {
+                rehka++
+            }
+
+            if (orel == 1 || rehka == 1){
+                win++
+                alert('вы угадали');
+            }else{
+                lose ++
+                alert('вы проиграли');
+            }
+
+            orel = 0;
+            rehka = 0;
+
+        } while (confirm(' Сыграть еще раз?'));
+
+        alert(`вы играли ${game} раз, угадали ${win} раз и проиграли ${lose} раз`);
+        
+    </script>
+    
+
+
+</body>
+</html>

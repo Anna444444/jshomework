@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--6.	Создать два массива. Удалить из первого массива такие элементы, которые есть во втором массиве.-->
+
+    <script>
+
+    let array1 = prompt("Введите элементы первого массива через запятую:").split(",");
+    let array2 = prompt("Введите элементы второго массива через запятую:").split(",");
+
+    for (let i = 0; i < array2.length; i++) {
+        let index = array1.indexOf(array2[i]);
+        while (index !== -1) {
+            array1.splice(index, 1);
+            index = array1.indexOf(array2[i]);
+        }
+    }
+
+    document.write("Первый массив после удаления:", array1);
+       
+    </script>
+
+ 
+    
+</body>
+</html>

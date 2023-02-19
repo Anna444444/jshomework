@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 4.	Билет считается счастливым, если в его номере сумма первой половины цифр равна сумме второй половины цифр. Пользователь вводит номер билета любой длины. Проверьте, счастливый ли это билет. -->
+
+    <script>
+
+        let ticketNumber = prompt("Введите номер билета:");
+
+        if (isNaN(ticketNumber) || ticketNumber.length == 0) {
+            document.write("Номер билета введен некорректно");
+        } else {
+            let halfLength = Math.floor(ticketNumber.length / 2);
+
+            let firstHalfSum = 0;
+            for (let i = 0; i < halfLength; i++) {
+                firstHalfSum += Number(ticketNumber[i]);
+            }
+
+            let secondHalfSum = 0;
+            for (let i = halfLength; i < ticketNumber.length; i++) {
+                secondHalfSum += Number(ticketNumber[i]);
+            }
+
+            if (firstHalfSum == secondHalfSum) {
+                document.write("Билет счастливый!");
+            } else {
+                document.write("Билет не счастливый");
+            }
+        }
+        
+    </script>
+    
+</body>
+</html>
