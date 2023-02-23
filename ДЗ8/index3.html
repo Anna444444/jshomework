@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание3</title>
+</head>
+<body>
+
+    <!--3. Асель решила вспомнить старые времена. В свое время было модно писать сообщения с чередующимися заглавной и малой буквами. Она захотела изобрести функцию, которая будет делать с любой предоставленной строкой аналогичное. Ваша задача: повторить её труд, написать функцию  camel(str) с учетом того, что пробелы и знаки препинания не должны портить чередование регистра символов (они в этом процессе не учитываются, но возвращаются в итоговой строке).-->
+
+    <script>
+
+        function camel(str) {
+        let result = '';
+        let isUpperCase = false;
+
+        for (let i = 0; i < str.length; i++) {
+            const char = str[i];
+            if (/[a-zA-Z]/.test(char)) {
+            result += isUpperCase ? char.toLowerCase() : char.toUpperCase();
+            isUpperCase = !isUpperCase;
+            } else {
+            result += char;
+            }
+        }
+        return result;
+        }
+
+        function testCamel() {
+            const testCases = [
+                { str: '', expected: '' },
+                { str: 'a b c d e f g h i j k l m n o p q r s t u v w x y z', expected: 'A b C d E f G h I j K l M n O p Q r S t U v W x Y z' },
+                { str: 'hello', expected: 'HeLlO' },
+                { str: 'WORLD', expected: 'WoRlD' },
+                { str: '123', expected: '123' },
+            ];
+
+            testCases.forEach((testCase) => {
+                const { str, expected } = testCase;
+                const result = camel(str);
+                console.assert(
+                result === expected,
+                `For array ${str}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        testCamel()
+
+    </script>
+
+ 
+    
+</body>
+</html>

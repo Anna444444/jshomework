@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--5. Тимур решил как-то отобразить в тексте BACKSPACE (т.е. удаление последнего символа). Он подумал, что символ @ отлично для этого подходит. Всем своим знакомым он дал строки такого вида (например, гр@оо@лк@оц@ва), чтобы посмотреть, кому удастся написать функцию cleanStr(str), возвращающую строку в ее чистом виде.-->
+
+    <script>
+
+        function cleanStr(str) {
+            const stack = [];
+            for (let char of str) {
+                if (char === '@') {
+                stack.pop();
+                } else {
+                stack.push(char);
+                }
+            }
+            return stack.join('');
+        }
+
+        function test_cleanStr() {
+            const testCases = [
+                { str: 'гр@оо@лк@оц@ва', expected: 'голова' },
+                { str: 'dd@ww@a', expected: 'dwa' },
+            ];
+
+            testCases.forEach((testCase) => {
+                const { str, expected } = testCase;
+                const result = cleanStr(str);
+                console.assert(
+                result === expected,
+                `For array ${str}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        test_cleanStr()
+
+        // document.write(cleanStr('гр@оо@лк@оц@ва'))
+
+    </script>
+
+ 
+    
+</body>
+</html>

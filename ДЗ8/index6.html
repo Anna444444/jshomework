@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--6. Римские цифры снова в моде! Напишите программу, которая переводит число в диапазоне от 0 до 9999 в римскую запись. -->
+
+    <!-- [  { value: 1000, numeral: 'M' },  { value: 900, numeral: 'CM' },  { value: 500, numeral: 'D' },  { value: 400, numeral: 'CD' },  { value: 100, numeral: 'C' },  { value: 90, numeral: 'XC' },  { value: 50, numeral: 'L' },  { value: 40, numeral: 'XL' },  { value: 10, numeral: 'X' },  { value: 9, numeral: 'IX' },  { value: 5, numeral: 'V' },  { value: 4, numeral: 'IV' },  { value: 1, numeral: 'I' }]; -->
+    <script>
+
+        var intToRoman = function(num) {
+            var str = [
+                ['I', 'V'],
+                ['X', 'L'],
+                ['C', 'D'],
+                ['M']
+            ];
+
+            var res = '';
+            var i = 0;
+            var tmp = 0; 
+
+            while (num > 0) {
+                tmp = num % 10;
+                if (tmp === 9) {
+                res = str[i][0] + str[i + 1][0] + res;
+                } else if (tmp >= 5) {
+                res = str[i][1] + str[i][0].repeat(tmp - 5) + res;
+                } else if (tmp === 4) {
+                res = str[i][0] + str[i][1] + res;
+                } else {
+                res = str[i][0].repeat(tmp) + res;
+                }
+                num = Math.floor(num / 10);
+                i++;
+            }
+            return res;
+        };
+
+        document.write(intToRoman(888))
+
+        function testIntToRoman() {
+            const testCases = [
+                { num: 12, expected: 'XII' },
+                { num: 14, expected: 'XIV' },
+                { num: 6, expected: 'VI' },
+            ];
+
+            testCases.forEach((testCase) => {
+                const { num, expected } = testCase;
+                const result = intToRoman(num);
+                console.assert(
+                result === expected,
+                `For array ${num}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        testIntToRoman()
+
+    </script>
+
+
+    
+</body>
+</html>

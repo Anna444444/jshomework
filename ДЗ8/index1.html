@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+    <!--1. Требуется определить индексы первого и последнего вхождения буквы в строке. Для этого нужно написать функцию firstAndLast(letter, str), включающую 2 параметра: letter – искомый символ(буква), str – целевая строка. Функция возвращает массив из двух индексов. В случае отсутствия буквы в строке, нужно вернуть [-1, -1].-->
+
+    <script>
+
+        function firstAndLast(letter, str) {
+            let firstIndex = str.indexOf(letter);
+            let lastIndex = str.lastIndexOf(letter);
+
+            if (firstIndex === -1) {
+                return [-1, -1];
+            } else {
+                return [firstIndex, lastIndex];
+            }
+        }
+
+        document.write(firstAndLast('a', 'alphabet'),'<br>');
+        document.write(firstAndLast('z', 'alphabet'),'<br>');
+        document.write(firstAndLast('o', 'book'));
+
+    </script>
+
+ 
+    
+</body>
+</html>

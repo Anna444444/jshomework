@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--4. Дмитрий считает, что когда текст пишут в скобках (как вот тут, например), его читать не нужно. Вот и надумал он существенно укоротить время чтения, написав функцию, которая будет удалять все, что расположено внутри скобок.
+    Помогите ленивому Диме разработать функцию shorten(str), которая будет удалять все, что внутри скобок и сами эти скобки, возвращая очищенный текст (учтите, что скобки могут быть вложенными).-->
+
+    <script>
+
+        function shorten(str) {
+            let result = '';
+            let openCount = 0;
+            
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === '(') {
+                openCount++;
+                } else if (str[i] === ')') {
+                openCount--;
+                continue;
+                }
+                if (openCount === 0) {
+                result += str[i];
+                }
+            }
+            return  result;
+        }
+
+        function testShorten() {
+            const testCases = [
+                { str: 'Hello (world)', expected: 'Hello ' },
+                { str: 'Hello(world)', expected: 'Hello' },
+                { str: 'Hello (wo(rld))', expected: 'Hello ' },
+                { str: 'Hello world', expected: 'Hello world' },   
+            ];
+
+            testCases.forEach((testCase) => {
+                const { str, expected } = testCase;
+                const result = shorten(str);
+                console.assert(
+                result === expected,
+                `For array ${str}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        testShorten()
+
+    </script>
+
+
+    
+</body>
+</html>

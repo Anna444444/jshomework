@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание2</title>
+</head>
+<body>
+
+    <!--2. Oпределить 3 наиболее часто встречаемых символа в строке. Пробелы не учитывать при подсчете. Требуется написать функцию top3(st), возвращающую массив. Итог работы функции представить в виде строки: «символ – количество раз, символ – количество раз…».-->
+
+    <script>
+
+        function top3(st) {
+        const freq = {};
+            for (let char of st) {
+                if (char !== ' ') {
+                freq[char] = (freq[char] || 0) + 1;
+                }
+            }
+
+        const arr = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+        const top3 = arr.slice(0, 3);
+        const result = top3.map(([char, count]) => `${char} - ${count}`).join(', ');
+        return result;
+        }
+
+        let result = top3('Привет как дела');
+        document.write(result,'<br>');
+
+        result = top3('aabbccddeeff');
+        document.write(result,'<br>');
+
+        result = top3('this is a test');
+        document.write(result,'<br>');
+
+        result = top3('');
+        document.write(result,'<br>');
+
+    </script>
+
+ 
+    
+</body>
+</html>
