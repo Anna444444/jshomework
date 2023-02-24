@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--2. В массиве хранятся имена сотрудников, которым была выписана премия за месяц. Проверить, не попал ли кто-либо из сотрудников в эту базу дважды: вывести эти имена в документ, а из массива все повторения удалить.-->
+
+    <script>
+
+
+        function prov(values){
+            const newSet = new Set(values); 
+            const uniqueNumbers = Array.from(newSet); 
+            
+            const duplicates = values.filter((number, index, numbers) => {
+                return numbers.indexOf(number) !== index;
+            });
+            document.write("Массив без повторов:", uniqueNumbers,'<br>');
+            document.write(`Повторяющейся элемент массива ${duplicates}`,'<br>','<br>')
+            return duplicates
+        }
+
+        function testProv() {
+            const testCases = [
+                { array: ["Маша","Петя","Оля","Ваня","Петя"], expected: 'Петя' },
+                { array: ["Маша","Петя","Оля","Ваня","Оля"], expected: 'Оля' },
+                { array: ["Маша","Петя","Оля","Ваня"], expected: '' },
+            ];
+
+            testCases.forEach((testCase) => {
+                const { array, expected } = testCase;
+                const result = prov(array);
+                console.assert(
+                result == expected,
+                `For array ${array} expected ${expected} but got ${result}`
+                );
+            });
+        }
+
+        testProv()
+    </script>
+
+
+    
+</body>
+</html>

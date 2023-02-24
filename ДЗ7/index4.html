@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--4.	Синоптики фиксировали дневные температуры в течение месяца: номер индекса массива - номер дня. Вывести в документ все локальные минимумы и максимумы температур в таком виде: "Максимумы: день 3 - 16о, день 7 - 25о, ...".  (Локальный максимум - значение, которое больше двух соседних, локальный минимум - меньше двух соседних)-->
+
+    <script>
+
+    function findLocalExtremes(temperatures) {
+    const maximas = [];
+    const minimas = [];
+
+        for (let i = 1; i < temperatures.length - 1; i++) {
+            const prev = temperatures[i - 1];
+            const current = temperatures[i];
+            const next = temperatures[i + 1];
+
+            if (current > prev && current > next) {
+            maximas.push({ day: i + 1, temperature: current });
+            }
+
+            if (current < prev && current < next) {
+            minimas.push({ day: i + 1, temperature: current });
+            }
+        }
+
+        return { maximas, minimas };
+    }
+
+    function displayLocalExtremes(temperatures) {
+        const { maximas, minimas } = findLocalExtremes(temperatures);
+
+        const output = document.createElement('div');
+
+        const maxText = `Максимумы: ${maximas.map(m => `день ${m.day} - ${m.temperature}°`).join(', ')}.`;
+        const minText = `Минимумы: ${minimas.map(m => `день ${m.day} - ${m.temperature}°`).join(', ')}.`;
+
+        output.textContent = `${maxText} ${minText}`;
+
+        document.body.appendChild(output);
+    }
+
+    const temperatures = [10, 12, 8, 16, 13, 18, 25, 22, 20, 19, 16, 13, 15, 17, 14, 11, 12, 14, 16, 18, 20, 22, 21, 19, 17, 14, 12, 10];
+
+    displayLocalExtremes(temperatures);
+
+       
+    </script>
+
+ 
+    
+</body>
+</html>

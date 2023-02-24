@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+    <!--1. В массиве найти максимальную длину последовательности неубывающих чисел.-->
+
+    <script>
+
+        function findMaxNonDecreasingSequenceLength(array) {
+            let max = 1
+        let currentLength = 1;
+
+            for (let i = 1; i < array.length; i++) {
+                if (array[i] >= array[i - 1]) {
+                currentLength++;
+                if (max < currentLength){
+                    max++
+        
+                }
+                } else {
+                currentLength = 1;
+                }
+            }
+
+            if (array.length == 0){
+                max = 0
+            }
+            return max
+        }
+
+        function testFindMaxNonDecreasingSequenceLength() {
+        const testCases = [
+            { array: [3, 9, 8, 4, 5, 1], expected: 2 },
+            { array: [3,9,8,3,4,5,8,5,25,2,1], expected: 4 },
+            { array: [1, 2, 3, 4, 5, 6], expected: 6 },
+            { array: [1, 1, 1, 1], expected: 4 },
+            { array: [], expected: 0 },
+            { array: [1], expected: 1 },
+        ];
+
+        testCases.forEach((testCase) => {
+            const { array, expected } = testCase;
+            const result = findMaxNonDecreasingSequenceLength(array);
+            console.assert(
+            result === expected,
+            `For array ${array}, expected ${expected}, but got ${result}`
+            );
+        });
+
+        document.write("All test cases passed!");
+        }
+
+        testFindMaxNonDecreasingSequenceLength();
+
+    </script>
+
+ 
+    
+</body>
+</html>

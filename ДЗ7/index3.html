@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+    <!--3.	Элементы массива содежит фамилии и имена сотрудников в виде строк: ["Фамилия1 Имя1", "Фамилия2 Имя2", ...]. Найти и вывести в документ всех однофамильцев.-->
+
+    <script>
+         
+            function findSurnameDuplicates(employees) {
+                let surnames = {};
+
+                for (let i = 0; i < employees.length; i++) {
+                    let employee = employees[i];
+                    let surname = employee.split(" ")[0];
+                    if (surnames[surname]) {
+                    surnames[surname].push(employee.split(" ")[1]);
+                    } else {
+                    surnames[surname] = [employee.split(" ")[1]];
+                    }
+                }                
+                for (let surname in surnames) {
+                    if (surnames[surname].length > 1) {
+                    return ("Однофамильцы " + surname + ": " + surnames[surname].join(", "));
+                    }
+                }
+            }
+
+        function testFindSurnameDuplicates() {
+        const testCases = [
+            { array: ["Иванов Иван", "Петров Петр", "Сидоров Иван", "Сидоров Петр", "Кузнецова Анна", "Иванова Мария", "Кузнецов Иван"], expected: 'Однофамильцы Сидоров: Иван, Петр' },];
+
+        testCases.forEach((testCase) => {
+            const { array, expected } = testCase;
+            const result = findSurnameDuplicates(array);
+            console.assert(
+            result === expected,
+            `For array ${array}, expected ${expected}, but got ${result}`
+            );
+        });
+
+        }
+
+        testFindSurnameDuplicates();
+       
+    </script>
+
+ 
+    
+</body>
+</html>
