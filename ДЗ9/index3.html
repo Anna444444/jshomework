@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание3</title>
+</head>
+<body>
+
+    <!--3. Пользователь вводит строку - прототип функции на языке JavaScript. Написать программу, которая анализирует эту функцию и выводит следующие данные: название функции, количество аргументов, их наименование и значения по умолчанию.
+    Пример: "function foo(index, len, flag = true)"
+    Вывод:
+    Имя функции: foo
+    Количество аргументов: 3
+    имя аргумента 1: index, значение по-умолчанию: undefined;
+    имя аргумента 2: len, значение по-умолчанию: undefined;
+    имя аргумента 3: flag, значение по-умолчанию: true. -->
+
+    <script>
+        function analyzeFunction(str) {
+            const regex = /function\s+([\w$]+)\s*\(([\w$,=\s]*)\)/;
+            const match = str.match(regex);
+
+            if (match) {
+                const functionName = match[1];
+                const args = match[2].split(',').map(arg => arg.trim());
+                const numArgs = args.length;
+                let output = `Имя функции: ${functionName}\nКоличество аргументов: ${numArgs}\n`;
+
+                for (let i = 0; i < numArgs; i++) {
+                    const argParts = args[i].split('=').map(part => part.trim());
+                    const argName = argParts[0];
+                    const argDefaultValue = argParts[1] ? argParts[1] : 'undefined';
+                    output += `имя аргумента ${i + 1}: ${argName}, значение по-умолчанию: ${argDefaultValue};\n`;
+                }
+                // console.log(output)
+                return output;
+            } else {
+                return 'Функция не найдена';
+            }
+        }
+
+        function test_analyzeFunction() {
+            const testCases = [
+                { str: 'function fof(index, len, flag = true)', expected: 'Имя функции: fof\nКоличество аргументов: 3\nимя аргумента 1: index, значение по-умолчанию: undefined;\nимя аргумента 2: len, значение по-умолчанию: undefined;\nимя аргумента 3: flag, значение по-умолчанию: true;\n' },
+            ];
+
+            testCases.forEach((testCase) => {
+                const { str, expected } = testCase;
+                const result = analyzeFunction(str);
+                console.assert(
+                    result === expected,
+                    `For str ${str}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        test_analyzeFunction()
+
+        // analyzeFunction('function fof(index, len, flag = true)');
+
+       
+
+
+    </script>
+
+ 
+    
+</body>
+</html>

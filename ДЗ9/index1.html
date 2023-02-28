@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    </body>
+    <script>
+      
+      function replaceDigitsWithWords(str) {
+      const words = {
+        "0": "ноль",
+        "1": "один",
+        "2": "два",
+        "3": "три",
+        "4": "четыре",
+        "5": "пять",
+        "6": "шесть",
+        "7": "семь",
+        "8": "восемь",
+        "9": "девять"
+      };
+
+      return str.replace(/\d/g, function(match) {
+        return words[match];
+      });
+    }
+    // str = "Привет как 1 дела"
+    // document.write(typeof  replaceDigitsWithWords(str))
+
+      function test_replaceDigitsWithWords() {
+        const testCases = [
+            { str: "Привет как 1 дела" , expected: 'Привет как один дела' },
+            { str: "Привет как 2 дела" , expected: 'Привет как два дела' },];
+
+        testCases.forEach((testCase) => {
+            const { str, expected } = testCase;
+            const result = replaceDigitsWithWords(str);
+            console.assert(
+            result === expected,
+            `For array ${str}, expected ${expected}, but got ${result}`
+            );
+        });
+
+        }
+
+        test_replaceDigitsWithWords();
+    </script>
+</html>

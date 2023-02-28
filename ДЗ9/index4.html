@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание4</title>
+</head>
+<body>
+
+    <!--4. Обратная польская нотация  - способ представления математических выражений, где операции записываются после операндов (аргументов). Например, можно записать следующий код  2 5 3 + *  вместо обычного математического выражения со скобками:  (5 + 3) * 2 . Обратная польская запись позволяет избавиться от скобок, которые используются для задания приоритета выполнения операций.
+    Обычное выражение (infix)	Обратная польская нотация (postfix)
+    3 - 2	3 2 -
+    3 * 2+5	5 3 2 * +
+    (12 - 3 ) /3	12 3 - 3 /
+    Дана строка, содержащая выражение в обратной польской нотации. Написать программу, вычисляющую результат выражения.-->
+
+    <script>
+        function evaluateExpression(expression) {
+            const stack = [];
+
+            const tokens = expression.split(' ');
+            
+            tokens.forEach((token) => {
+                if (!isNaN(token)) {
+                    stack.push(parseInt(token));
+                } else {
+                    const operand2 = stack.pop();
+                    const operand1 = stack.pop();
+                    
+                switch (token) {
+                    case '+':
+                    stack.push(operand1 + operand2);
+                    break;
+                    case '-':
+                    stack.push(operand1 - operand2);
+                    break;
+                    case '*':
+                    stack.push(operand1 * operand2);
+                    break;
+                    case '/':
+                    stack.push(operand1 / operand2);
+                    break;
+                }
+                }
+            });
+
+            return stack.pop();
+        }
+
+        function test_evaluateExpression() {
+            const testCases = [
+                { str: '8 2 / 3 +' ,expected: 7},
+            ];
+
+            testCases.forEach((testCase) => {
+                const { str, expected } = testCase;
+                const result = evaluateExpression(str);
+                console.assert(
+                    result === expected,
+                    `For str ${str}, expected ${expected}, but got ${result}`
+                );
+            });
+
+        }
+        test_evaluateExpression()
+
+    </script>
+
+ 
+    
+</body>
+</html>

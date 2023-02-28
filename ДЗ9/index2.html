@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание2</title>
+</head>
+<body>
+
+    <!--2. Дана строка, содержащая буквы, цифры и скобки '(', ')', '[', ']', '{', '}'. Если скобки расставлены правильно (то есть каждой открывающей скобки соответствует закрывающая того же вида), то вывести 'yes', иначе вывести номер первой незакрытой или лишней закрывающей скобки.-->
+
+    <script>
+        function checkBrackets(str) {
+            const stack = []; 
+            const openBrackets = { '(': true, '[': true, '{': true }; 
+            const closeBrackets = { ')': '(', ']': '[', '}': '{' };
+
+            for (let i = 0; i < str.length; i++) {
+                const ch = str[i];
+                if (openBrackets[ch]) {
+                    stack.push(ch); 
+                } else if (closeBrackets[ch]) {
+                    const lastOpenBracket = stack.pop(); 
+                if (lastOpenBracket !== closeBrackets[ch]) {
+                    return i + 1;
+                }
+                }
+            }
+
+            return stack.length === 0 ? 'yes' : str.length + 1; 
+        }
+
+       
+        function test_checkBrackets() {
+        const testCases = [
+            { str: '()[]{}', expected: 'yes' },
+            { str: '(){}[)', expected: 6 },,
+        ];
+
+        testCases.forEach((testCase) => {
+            const { str, expected } = testCase;
+            const result = checkBrackets(str);
+            console.assert(
+            result === expected,
+            `For str ${str}, expected ${expected}, but got ${result}`
+            );
+        });
+    }
+    test_checkBrackets()
+
+    </script>
+
+ 
+    
+</body>
+</html>
