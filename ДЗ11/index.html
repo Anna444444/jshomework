@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+    <!-- 1. Создайте класс Animal со свойствами: name, weight и size. Реализуйте метод talk(), который будет выводить строку "Mmmmmmm...". И метод eat(meal), который будет увеличивать size и weight на количество букв в строке "meal".
+
+    2. Создайте классы травоядных и хищников: Herbivore и Predator - наследников класса Animal.
+    У Herbivore имеется свойство ratio - массив названий того, чем оно может питаться. Модифицируйте поведение метода eat(), чтобы не есть всё подряд, а только то, что входит в рацион животного.
+    У Predator модифицируйте метод eat() так, чтобы животное питалось только другими животными, но чей вес и размер меньше своего. Кроме того, если животное поело, его размер и вес увеличивается на 20% размера и веса съеденного животного. Придумайте, что можно сделать, чтобы нельзя было съесть два раза один и тот же экземпляр животного.
+
+    3. Создайте классы Goose и Wolf - наследники от Herbivore и Predator. Модифицируйте для них метод talk(), чтобы они соответствовали гусю и волку. Придумайте для них ещё по одному свойству и методу, чтобы они были разными или работали по-разному у гусей и волков.
+
+    4. Создайте несколько экцемпляров класса Goose и несколько экцемпляров Wolf.
+
+    5. Поиграйте с животными :) -->
+
+
+
+    <script>
+
+        class Animal {
+        constructor(name, weight, size) {
+                this.name = name;
+                this.weight = weight;
+                this.size = size;
+            }
+
+            talk() {
+                console.log("Mmmmmmm...");
+            }
+
+            eat(meal) {
+                const mealLength = meal.length;
+                this.size += mealLength;
+                this.weight += mealLength;
+            }
+        }
+
+        class Herbivore extends Animal {
+        constructor(name, weight, size, ratio) {
+                super(name, weight, size);
+                this.ratio = ratio;
+            }
+
+            eat(meal) {
+                if (this.ratio.includes(meal)) {
+                    const mealLength = meal.length;
+                    this.size += mealLength;
+                    this.weight += mealLength;
+                } else {
+                    console.log(`${this.name} не может есть ${meal}.`);
+                }
+            }
+        }
+
+        class Predator extends Animal {
+        constructor(name, weight, size) {
+            super(name, weight, size);
+            this.prey = new Set();
+        }
+
+        eat(animal) {
+            if (!(animal instanceof Animal)) {
+                console.log(`${this.name} не может есть это.`);
+                return;
+            }
+            if (animal === this) {
+                console.log(`${this.name} не может есть самого себя.`);
+                return;
+            }
+            if (!(animal instanceof Predator) && animal.weight < this.weight && animal.size < this.size) {
+                const mealSize = animal.size * 1.2;
+                const mealWeight = animal.weight * 1.2;
+                this.size += mealSize;
+                this.weight += mealWeight;
+                this.prey.add(animal);
+                console.log(`${this.name} съел ${animal.name} и теперь весит ${this.weight} и имеет размер ${this.size}.`);
+            } else {
+                console.log(`${this.name} не может есть ${animal.name}.`);
+            }
+        }
+        }
+
+        class Goose extends Herbivore {
+        constructor(name, weight, size, ratio, flySpeed) {
+                super(name, weight, size, ratio);
+                this.flySpeed = flySpeed;
+            }
+
+            talk() {
+                console.log("Га-га-га");
+            }
+
+            fly() {
+                console.log(`${this.name} летит со скоростью ${this.flySpeed} км/ч.`);
+            }
+        }
+
+        class Wolf extends Predator {
+        constructor(name, weight, size, packSize) {
+                super(name, weight, size);
+                this.packSize = packSize;
+            }
+
+            talk() {
+                console.log("Уууууу");
+            }
+
+            hunt() {
+                console.log(`${this.name} охотится в стае волков размером ${this.packSize}.`);
+            }
+        }
+
+        const wildGoose = new Goose("Wild", 2, 4, ["seeds", "plants"], 50);
+        const domesticGoose = new Goose("Domestic", 3, 5, ["seeds", "vegetables"], 40);
+
+        const grayWolf = new Wolf("Gray", 80, 160, 6);
+        const blackWolf = new Wolf("Black", 70, 150, 5);
+        const whiteWolf = new Wolf("White", 90, 170, 4);
+
+
+        wildGoose.eat("seeds");
+        console.log(wildGoose.size);
+        console.log(wildGoose.weight);
+
+        wildGoose.talk();
+        domesticGoose.talk();
+        grayWolf.talk();
+        blackWolf.talk();
+        whiteWolf.talk();
+
+
+        const rabbit = new Herbivore("Rabbit", 2, 3, ["plants"]);
+        const deer = new Herbivore("Deer", 5, 100, ["plants"]);
+        const sheep = new Herbivore("Sheep", 4, 60, ["plants"]);
+
+        blackWolf.eat(rabbit);
+        console.log(blackWolf.size);
+        console.log(blackWolf.weight);
+
+        blackWolf.eat(deer);
+        console.log(blackWolf.size);
+        console.log(blackWolf.weight);
+
+     
+        blackWolf.eat(sheep);
+        console.log(blackWolf.size);
+        console.log(blackWolf.weight);
+
+        grayWolf.hunt(wildGoose);
+        console.log(grayWolf.size);
+        console.log(grayWolf.weight);
+
+        whiteWolf.hunt(domesticGoose);
+        console.log(whiteWolf.size); 
+        console.log(whiteWolf.weight);
+
+        whiteWolf.hunt(domesticGoose);
+        console.log(whiteWolf.size);
+        console.log(whiteWolf.weight);
+
+
+
+        function testAnimalTalk() {
+            const animal = new Animal('Giraffe', 100, 200);
+            const result = animal.talk();
+            if (result !== "Mmmmmmm...") {
+                throw new Error('Animal talk test failed!');
+            }
+        }
+
+        function testAnimalEat() {
+            const animal = new Animal('Giraffe', 100, 200);
+            animal.eat("leaves");
+            if (animal.size !== 106 || animal.weight !== 206) {
+                throw new Error('Animal eat test failed!');
+            }
+        }
+
+        function testHerbivoreRatio() {
+            const herbivore = new Herbivore('Giraffe', 100, 200, ['leaves', 'grass']);
+            if (!herbivore.ratio.includes('leaves') || !herbivore.ratio.includes('grass')) {
+                throw new Error('Herbivore ratio test failed!');
+            }
+        }
+
+        function testHerbivoreEat() {
+            const herbivore = new Herbivore('Giraffe', 100, 200, ['leaves', 'grass']);
+            herbivore.eat('leaves');
+            if (herbivore.size !== 106 || herbivore.weight !== 206) {
+                throw new Error('Herbivore eat test failed!');
+            }
+            herbivore.eat('meat');
+            if (herbivore.size !== 106 || herbivore.weight !== 206) {
+                throw new Error('Herbivore eat test failed!');
+            }
+        }
+
+        function testPredatorEat() {
+            const predator = new Predator('Lion', 200, 400, ['meat']);
+            const prey = new Animal('Gazelle', 50, 100);
+            predator.eat(prey);
+            if (predator.size !== 240 || predator.weight !== 480) {
+                throw new Error('Predator eat test failed!');
+            }
+            if (prey.size !== 50 || prey.weight !== 100) {
+                throw new Error('Predator eat test failed!');
+            }
+            predator.eat(predator);
+            if (predator.size !== 240 || predator.weight !== 480) {
+                throw new Error('Predator eat test failed!');
+            }
+        }
+
+
+
+    </script>
+
+     
+    
+</body>
+</html>
