@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+    <!-- 1 час в задаче = 6 секунд реального времени.
+        Используйте класс Date и функции setTimeout() / setInterval(). 
+        Создать класс Автомобиль (производитель, модель, год выпуска, средняя скорость), и следующие функции для работы с этим объектом.
+        1.	Метод для вывода на экран информации об автомобиле.
+        2.	Метод для подсчета необходимого времени для преодоления переданного расстояния со средней скоростью. Учтите, что через каждые 4 часа дороги водителю необходимо делать перерыв на 1 час.
+        3.  Для для отправки автомобиля в путь. Автомобиль выводит строку «Поехали» в начале пути, и «Приехали» - через время, когда автомобиль закончит путь.
+
+        Создайте класс-наследник ГрузовойАвтомобиль, у которого добавляется характеристика в виде грузоподъёмности.
+        1.	Реализуйте методы для погрузки и разгрузки.
+        2.	Переопределите метод для подсчета времени пути, так как чем больше вес груза, тем меньше его скорость.
+
+        Создайте класс Автобус. У автобуса есть расписание, и отправить автобус в путь можно только в точное время, по расписанию. Также, в отличие от грузового автомобиля, он перевозит не грузы, а людей, и остановку делает каждые 30 мин.
+        1.	На каждой остановке в автобус заходит случайное (от 1 до 5) количество пассажиров, и такое же случайное количество выходит из него.
+        2.	Из-за того что постоянно меняется количество пассажиров, скорость автобуса может меняться, и автобус может приехать на конечную остановку с опозданием, или наоборот, с опережением. Поэтому автобус в конце пути должен сообщать: «Приехали с опозданием на N часов M минут» или «Приехали с опережением на N часов M минут».
+
+        Поиграйтесь с машинками 😊 -->
+
+
+
+    <script>
+
+        class Car {
+            constructor(producer, model, year, avgSpeed) {
+                this.producer = producer;
+                this.model = model;
+                this.year = year;
+                this.avgSpeed = avgSpeed;
+            }
+
+            getInfo() {
+                console.log(`Автомобиль: ${this.producer} ${this.model} (${this.year} года выпуска)\nСредняя скорость: ${this.avgSpeed} км/ч`);
+            }
+
+            calculateTime(distance) {
+                const time = distance / this.avgSpeed;
+                const rest = Math.floor(time / 4);
+                const hours = Math.floor(time) + rest;
+                const minutes = Math.round((time - Math.floor(time)) * 60);
+                console.log(`Необходимое время: ${hours} ч ${minutes} мин`);
+                return { hours, minutes };
+            }
+
+            drive(distance) {
+                console.log('Поехали!');
+                const { hours, minutes } = this.calculateTime(distance);
+                const arrivalTime = new Date();
+                arrivalTime.setHours(arrivalTime.getHours() + hours);
+                arrivalTime.setMinutes(arrivalTime.getMinutes() + minutes);
+
+                setTimeout(() => {
+                console.log('Приехали!');
+                }, hours * 3600000 + minutes * 60000);
+            }
+        }
+
+        class Truck extends Car {
+            constructor(producer, model, year, avgSpeed, payload) {
+                super(producer, model, year, avgSpeed);
+                this.payload = payload;
+            }
+
+            loadCargo(cargoWeight) {
+                this.payload += cargoWeight;
+                console.log(`Грузовик загружен. Общий вес груза: ${this.payload} тонн`);
+            }
+
+            unloadCargo(cargoWeight) {
+                if (this.payload - cargoWeight < 0) {
+                console.log('Невозможно разгрузить больше груза, чем есть в грузовике');
+                } else {
+                this.payload -= cargoWeight;
+                console.log(`Грузовик разгружен. Общий вес груза: ${this.payload} тонн`);
+                }
+            }
+
+            calculateTime(distance) {
+                const speed = this.avgSpeed - this.payload / 10;
+                const time = distance / speed;
+                const rest = Math.floor(time / 4);
+                const hours = Math.floor(time) + rest;
+                const minutes = Math.round((time - Math.floor(time)) * 60);
+                console.log(`Необходимое время: ${hours} ч ${minutes} мин`);
+                return { hours, minutes };
+            }
+        }
+
+      
+            class Bus {
+                constructor(schedule) {
+                    this.schedule = schedule;
+                    this.passengers = 0;
+                    this.speed = 40; // km/h
+                    this.currentStop = 0;
+                    this.departureTime = this.schedule[this.currentStop];
+                    this.totalDelay = 0;
+                }
+
+                run() {
+                    console.log(`Автобус поехал в ${this.departureTime}:00`);
+                    while (this.currentStop < this.schedule.length - 1) {
+                    this.passengers += this.getRandomInt(1, 5);
+                    this.passengers -= this.getRandomInt(1, Math.min(this.passengers, 5));
+                    console.log(`остановка ${this.currentStop + 1}: ${this.passengers} пасажир сел`);
+
+                    const distanceToNextStop = this.getDistance(this.currentStop, this.currentStop + 1);
+                    const timeToNextStop = distanceToNextStop / this.speed;
+
+                    const actualArrivalTime = this.departureTime + timeToNextStop + this.totalDelay;
+                    const expectedArrivalTime = this.schedule[this.currentStop + 1];
+
+                    if (actualArrivalTime > expectedArrivalTime) {
+                        const delay = this.getTimeDifference(actualArrivalTime, expectedArrivalTime);
+                        console.log(`Приехал в ${delay}`);
+                        this.totalDelay += delay;
+                    } else if (actualArrivalTime < expectedArrivalTime) {
+                        const ahead = this.getTimeDifference(expectedArrivalTime, actualArrivalTime);
+                        console.log(`Приехал ${ahead} раньше`);
+                        this.totalDelay -= ahead;
+                    } else {
+                        console.log('Приехал во время');
+                    }
+
+                    this.departureTime = expectedArrivalTime;
+                    this.currentStop++;
+                    }
+                }
+
+                getDistance(stop1, stop2) {
+                    const distances = [0, 10, 25, 40, 60, 75, 90, 110, 125, 140];
+                    return distances[stop2] - distances[stop1];
+                }
+
+                getTimeDifference(time1, time2) {
+                    const diff = time1 - time2;
+                    const hours = Math.floor(diff);
+                    const minutes = Math.round((diff - hours) * 60);
+                    return `${hours} часов ${minutes} минут`;
+                }
+
+                getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+            }
+
+
+
+        const car = new Car('Toyota', 'Corolla', 2015, 60);
+        car.getInfo();
+        car.calculateTime(500);
+        car.drive(500);
+
+        const truck = new Truck('Mercedes', 'Actros', 2018, 80, 2000);
+        truck.loadCargo(1500);
+        truck.unloadCargo(1000);
+        truck.calculateTime(1000);
+
+        const schedule = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+        const bus = new Bus(schedule);
+        bus.run();
+
+
+    </script>
+
+     
+    
+</body>
+</html>
