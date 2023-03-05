@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задание1</title>
+  </head>
+  <body>
+    <h1>Домашка</h1>
+
+    <h2>Workers</h2>
+    <pre id="output"></pre>
+
+    <h2>Fired Workers</h2>
+    <pre id="fired-output"></pre>
+
+    <h2>Average age</h2>
+    <p id="average-age"></p>
+
+    <h2>Youngest</h2>
+    <p id="youngest"></p>
+
+    <h2>Oldest</h2>
+    <p id="oldest"></p>
+
+    <h2>Total salary</h2>
+    <p id="total-salary"></p>
+
+    <h2>Largest salary</h2>
+    <p id="largest-salary"></p>
+
+    <h2>Lowest salary</h2>
+    <p id="lowest-salary"></p>
+
+    <h2>Average salary</h2>
+    <p id="average-salary"></p>
+
+    <h2>Median salary</h2>
+    <p id="median-salary"></p>
+
+    <script>
+      //  1. Создать функцию newEmployee(fullName, birthDate, position, salary), добавляющую нового работника. Функция должна возвращать результат в виде объекта с полями: id, errorDescription. В случае ошибки id = -1, а errorDescription содержит строку, поясняющую, что именно не так.
+      const database = [];
+      const firedWorkersdatabase = [];
+
+      function makeGetId() {
+        let id = 0;
+
+        return () => {
+          return ++id;
+        };
+      }
+
+      const getId = makeGetId();
+
+      function newEmployee(fullName, birthDate, position, salary) {
+        if (!fullName)
+          return { id: -1, errorDescription: 'fullName not specified' };
+        if (!birthDate)
+          return { id: -1, errorDescription: 'birthDate not specified' };
+        if (!position)
+          return { id: -1, errorDescription: 'position not specified' };
+        if (!salary)
+          return { id: -1, errorDescription: 'salary not specified' };
+        if (!new Date(birthDate))
+          return { id: -1, errorDescription: 'birthDate is not valid' };
+
+        for (let x of database) {
+          if (x.fullName === fullName)
+            return { id: -1, errorDescription: 'Exists' };
+        }
+
+        const worker = {
+          id: getId(),
+          fullName,
+          position,
+          salary,
+          birthDate: new Date(birthDate),
+        };
+
+        database.push(worker);
+
+        return { id: worker.id, errorDescription: '' };
+      }
+
+      // 1.2) Заполнить базу сотрудников.
+      newEmployee('Виталий Немыкин', '1984.08.05', 'преподаватель', 70000);
+      newEmployee(
+        'Гульжан Каракул',
+        '1985.08.05',
+        'системный программист',
+        800000,
+      );
+      newEmployee('Пётр Карлин', '1986.08.05', 'frontend программист', 800000);
+      newEmployee('Паук Человек', '1988.12.04', 'отомститель', 100000);
+      newEmployee('Тор Одинсон', '1988.12.05', 'отомститель', 100000);
+
+      console.log(database);
+
+      // 1.3) Реализовать fireEmployee(id), увольняющую сотрудника. Функция возвращает результат по тем же правилам.
+      function fireEmployee(id) {
+        const idx = database.findIndex((worker) => worker.id === id);
+
+        if (idx < 0) {
+          return {
+            id: -1,
+            errorDescription: `worker with id ${id} does not exist`,
+          };
+        }
+
+        firedWorkersdatabase.push(database[idx]);
+
+        database.splice(idx, 1);
+
+        return { id, errorDescription: '' };
+      }
+
+      console.log(fireEmployee(2));
+      console.log(fireEmployee(0));
+
+      // 1.3) Реализовать getEmployeeId(fullName), Выполняющую поиск сотрудника в базе по имени и фамилии, и возвращающую id сотрудника или -1 в случае, если такой не найден.
+
+      function getEmployeeId(fullName) {
+        const worker = database.find((worker) => worker.fullName === fullName);
+
+        if (!worker) {
+          return -1;
+        }
+
+        return worker.id;
+      }
+
+      console.log(getEmployeeId('Пётр Карлин'));
+      console.log(getEmployeeId('Вася Пупкин'));
+
+      //     1.4) Реализовать getEmployeeRecord(id), возвращающую полную карточку сотрудника со всеми полями, или объект {id, errorDescription}, как в (1).
+      function getEmployeeRecord(id) {
+        const worker = database.find((worker) => worker.id === id);
+
+        if (!worker) {
+          return {
+            id: -1,
+            errorDescription: `worker with id ${id} does not exist`,
+          };
+        }
+
+        return worker;
+      }
+
+      console.log(getEmployeeRecord(3));
+      console.log(getEmployeeRecord(2));
+
+      // 1.5) Реализовать getEmployeeList(selector), возвращающую массив карточек сотрудников, для которых функция selector возвращает true. Пример вызова: getEmployeeList(x => x.salary < 250000). Предусмотреть, чтобы передаваемая функция не могла никак изменить данные в базе.
+      function getEmployeeList(selector) {
+        return database.filter((worker) => selector({ ...worker }));
+      }
+
+      console.log(getEmployeeList((x) => x.salary < 250000));
+
+      // 2. Используя сделанные функции работы с базой, вывести в документ информацию об уволенных сотрудниках.
+      document.querySelector('#fired-output').textContent = JSON.stringify(
+        firedWorkersdatabase,
+        null,
+        2,
+      );
+
+      // 3. Вывести в документ средний возраст действующих сотрудников. ФИО самого молодого и самого старого сотрудника.
+      function getAgeYears(birthDate) {
+        return new Date(new Date() - new Date(birthDate)) / 31556952000;
+      }
+
+      function getAverageAge() {
+        return (
+          database
+            .map((w) => getAgeYears(w.birthDate))
+            .reduce((a, b) => a + b, 0) / database.length
+        );
+      }
+
+      document.querySelector(
+        '#average-age',
+      ).textContent = `${getAverageAge()} лет`;
+
+      function getYoungestWorker() {
+        let youngest = database[0];
+
+        database.forEach((worker) => {
+          if (getAgeYears(worker.birthDate) < getAgeYears(youngest.birthDate)) {
+            youngest = worker;
+          }
+        });
+
+        return youngest;
+      }
+
+      function getOldestWorker() {
+        let oldest = database[0];
+
+        database.forEach((worker) => {
+          if (getAgeYears(worker.birthDate) > getAgeYears(oldest.birthDate)) {
+            oldest = worker;
+          }
+        });
+
+        return oldest;
+      }
+
+      const youngest = getYoungestWorker();
+      document.querySelector('#youngest').textContent = `${
+        youngest.fullName
+      }, ${Math.floor(getAgeYears(youngest.birthDate))} лет`;
+
+      const oldest = getOldestWorker();
+      document.querySelector('#oldest').textContent = `${
+        oldest.fullName
+      }, ${Math.floor(getAgeYears(oldest.birthDate))} лет`;
+
+      // 4. Вывести общий размер зарплатного фонда компании, самую маленькую и самую большую зарплаты, среднюю зарплату, медианную зарплату.
+      function getTotalSalaray() {
+        return database.map((w) => w.salary).reduce((a, b) => a + b, 0);
+      }
+
+      function getLowestSalary() {
+        return Math.min(...database.map((w) => w.salary));
+      }
+
+      function getLargestSalary() {
+        return Math.max(...database.map((w) => w.salary));
+      }
+
+      function getAverageSalary() {
+        return getTotalSalaray() / database.length;
+      }
+
+      function getMedianSalary() {
+        const salaryMap = {};
+
+        database
+          .map((w) => w.salary)
+          .forEach((salary) => {
+            console.log({ salary });
+            salaryMap[salary] = salaryMap[salary] ? salaryMap[salary] + 1 : 1;
+          });
+
+        let biggestValue = 0;
+        let biggestKey = 0;
+
+        Object.keys(salaryMap).forEach((key) => {
+          if (salaryMap[key] > biggestValue) {
+            biggestKey = key;
+            biggestValue = salaryMap[key];
+          }
+        });
+
+        return biggestKey;
+      }
+
+      document.querySelector('#total-salary').textContent = getTotalSalaray();
+      document.querySelector('#lowest-salary').textContent = getLowestSalary();
+      document.querySelector('#median-salary').textContent = getMedianSalary();
+      document.querySelector('#largest-salary').textContent =
+        getLargestSalary();
+      document.querySelector('#average-salary').textContent =
+        getAverageSalary();
+
+      
+        
+      document.querySelector('#output').textContent = JSON.stringify(
+        database,
+        null,
+        2,
+      );
+      
+      
+
+    </script>
+  </body>
+</html>
