@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание4</title>
+</head>
+<body>
+
+<!-- 4.	Создать прямоугольную матрицу из N строк и M столбцов со случайными числами от -10 до 10. Найти строку и столбец с наибольшим количеством нулей и удалить их. Вывести результат.-->
+
+    <script>
+
+    let N = 5;
+    let M = 7;
+    let matrix = [];
+
+    for (let i = 0; i < N; i++) {
+        matrix.push([]);
+        for (let j = 0; j < M; j++) {
+            matrix[i][j] = Math.floor(Math.random() * 21) - 10;
+        }
+    }
+
+    let maxZeroCountRow = -1;
+    let maxZeroCountCol = -1;
+    let maxZeroCount = -1;
+
+    for (let i = 0; i < N; i++) {
+        let zeroCountRow = 0;
+        for (let j = 0; j < M; j++) {
+            if (matrix[i][j] === 0) {
+            zeroCountRow++;
+            }
+        }
+
+        if (zeroCountRow > maxZeroCount) {
+            maxZeroCount = zeroCountRow;
+            maxZeroCountRow = i;
+        }
+    }
+
+    for (let j = 0; j < M; j++) {
+        let zeroCountCol = 0;
+        for (let i = 0; i < N; i++) {
+            if (matrix[i][j] === 0) {
+            zeroCountCol++;
+            }
+        }
+
+        if (zeroCountCol > maxZeroCount) {
+            maxZeroCount = zeroCountCol;
+            maxZeroCountCol = j;
+        }
+    }
+
+    if (maxZeroCountRow !== -1) {
+        matrix.splice(maxZeroCountRow, 1);
+        N--;
+    }
+
+    if (maxZeroCountCol !== -1) {
+        for (let i = 0; i < N; i++) {
+            matrix[i].splice(maxZeroCountCol, 1);
+        }
+        M--;
+    }
+
+        console.log("Результат:");
+        console.log(matrix);
+
+
+
+    </script>
+
+     
+    
+</body>
+</html>

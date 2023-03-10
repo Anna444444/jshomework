@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание3</title>
+</head>
+<body>
+
+<!-- 3.	Создать прямоугольную матрицу из N строк и M столбцов со случайными числами от -10 до 10. Найти локальные минимумы и локальные максимумы в матрице, вывести их в документ с номерами индексов (координатами).-->
+
+    <script>
+
+    let N = 5;
+    let M = 7;
+    let matrix = [];
+
+    for (let i = 0; i < N; i++) {
+        matrix.push([]);
+        for (let j = 0; j < M; j++) {
+            matrix[i][j] = Math.floor(Math.random() * 21) - 10;
+        }
+    }
+
+    let localMinima = [];
+    let localMaxima = [];
+
+    for (let i = 1; i < N - 1; i++) {
+        for (let j = 1; j < M - 1; j++) {
+            let isLocalMinimum = true;
+            let isLocalMaximum = true;
+
+            for (let di = -1; di <= 1; di++) {
+            for (let dj = -1; dj <= 1; dj++) {
+                if (di === 0 && dj === 0) continue;
+
+                let ni = i + di;
+                let nj = j + dj;
+
+                if (matrix[ni][nj] <= matrix[i][j]) {
+                isLocalMinimum = false;
+                }
+
+                if (matrix[ni][nj] >= matrix[i][j]) {
+                isLocalMaximum = false;
+                }
+            }
+            }
+
+            if (isLocalMinimum) {
+            localMinima.push([i, j]);
+            }
+
+            if (isLocalMaximum) {
+            localMaxima.push([i, j]);
+            }
+        }
+    }
+
+    console.log("Локальные минимумы:");
+    console.log(localMinima);
+    console.log("Локальные максимумы:");
+    console.log(localMaxima);
+
+
+
+    </script>
+
+     
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+<!-- 1.	Пользователь вводит два числа N и M - размер двумерного массива (матрицы). Создать такой массив, заполненный случайными целыми числами от -10 до 10 и вывести в документ.
+Примечание. Рекомендую создать примерно такие функции: getIntFromUser(promptString);  getRandomInt(min, max);  getRandomMatrix(rows, columns);  showMatrix(matrix.)-->
+
+    <script>
+
+        function getIntFromUser(promptString) {
+            let input;
+            do {
+                input = parseInt(prompt(promptString));
+            } while (isNaN(input) || input < 1);
+            return input;
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getRandomMatrix(rows, columns) {
+            let matrix = [];
+
+            for (let i = 0; i < rows; i++) {
+                let row = [];
+
+                for (let j = 0; j < columns; j++) {
+                row.push(getRandomInt(-10, 10));
+                }
+                matrix.push(row);
+            }
+            return matrix;
+        }
+
+        function showMatrix(matrix) {
+            let table = document.createElement('table');
+
+            for (let i = 0; i < matrix.length; i++) {
+                let row = document.createElement('tr');
+
+                for (let j = 0; j < matrix[i].length; j++) {
+                let cell = document.createElement('td');
+                cell.textContent = matrix[i][j];
+                row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+            document.body.appendChild(table);
+        }
+
+        let rows = getIntFromUser('Введите количество строк: ');
+        let columns = getIntFromUser('Введите количество столбцов: ');
+
+        let matrix = getRandomMatrix(rows, columns);
+        showMatrix(matrix);
+
+
+
+    </script>
+
+     
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание7</title>
+</head>
+<body>
+
+<!-- 7.	В микрорайоне N домов. Имеется таблица N х N, показывающая, сколько метров составляет путь от одного дома до другого. Пример такой таблицы:
+
+	1	2	3	4
+1	0	342	423	187
+2	236	0	330	251
+3	472	346	0	434
+4	295	198	622	0
+
+Здесь видно, что путь от дома 4 до дома 2 составляет 198 метров. А обратный путь от дома 2 до дома 4 - 251 метр.
+Пользователь вводит номера домов через запятую, в порядке их обхода. Найти и вывести, сколько метров составит его общий путь. -->
+
+    <script>
+
+        function findTotalDistance(path, matrix) {
+            let pathArr = path.split(',');
+            let totalDistance = 0;
+            for (let i = 0; i < pathArr.length - 1; i++) {
+                let currentHouse = parseInt(pathArr[i], 10);
+                let nextHouse = parseInt(pathArr[i + 1], 10);
+                totalDistance += matrix[currentHouse - 1][nextHouse - 1];
+            }
+            return totalDistance;
+        }
+
+        const matrix = [
+        [0, 342, 423, 187],
+        [236, 0, 330, 251],
+        [472, 346, 0, 434],
+        [295, 198, 622, 0],
+        ];
+        let path = '1,3,4,2';
+        let totalDistance = findTotalDistance(path, matrix);
+        console.log(`Общий путь составляет ${totalDistance} метров`);
+
+
+
+    </script>
+
+     
+    
+</body>
+</html>

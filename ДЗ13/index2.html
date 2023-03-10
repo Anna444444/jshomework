@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание2</title>
+</head>
+<body>
+
+<!-- 2.	Создать прямоугольную матрицу из N строк и M столбцов со случайными числами от -10 до 10. Найти и вывести суммы нечётных элементов в каждой строке и в каждом столбце.-->
+
+    <script>
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function getRandomMatrix(rows, columns) {
+        const matrix = [];
+        for (let i = 0; i < rows; i++) {
+            matrix[i] = [];
+            for (let j = 0; j < columns; j++) {
+            matrix[i][j] = getRandomInt(-10, 10);
+            }
+        }
+        return matrix;
+    }
+
+    function getSumOfOddElementsInRow(matrix, row) {
+        let sum = 0;
+        for (let j = 0; j < matrix[row].length; j++) {
+            if (matrix[row][j] % 2 !== 0) {
+            sum += matrix[row][j];
+            }
+        }
+        return sum;
+    }
+
+    function getSumOfOddElementsInColumn(matrix, column) {
+        let sum = 0;
+        for (let i = 0; i < matrix.length; i++) {
+            if (matrix[i][column] % 2 !== 0) {
+            sum += matrix[i][column];
+            }
+        }
+        return sum;
+    }
+
+    function showMatrix(matrix) {
+        for (let i = 0; i < matrix.length; i++) {
+            console.log(matrix[i]);
+        }
+    }
+
+    const N = 5;
+    const M = 7;
+    const matrix = getRandomMatrix(N, M);
+
+    console.log("Матрица:");
+    showMatrix(matrix);
+
+    console.log("Суммы нечетных элементов в строках:");
+    for (let i = 0; i < matrix.length; i++) {
+        console.log(`Строка ${i}: ${getSumOfOddElementsInRow(matrix, i)}`);
+    }
+
+    console.log("Суммы нечетных элементов в столбцах:");
+        for (let j = 0; j < matrix[0].length; j++) {
+        console.log(`Столбец ${j}: ${getSumOfOddElementsInColumn(matrix, j)}`);
+    }
+
+
+    </script>
+
+     
+    
+</body>
+</html>

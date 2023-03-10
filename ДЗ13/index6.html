@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание6</title>
+</head>
+<body>
+
+<!-- 6.	Квадратная матрица считается волшебной, если у него одинаковая сумма элементов в каждой строке, в каждом столбце, и по двум диагоналям. Пользователь вводит построчно значения квадратной матрицы N x N. Определить, является ли она волшебной.-->
+
+    <script>
+
+    let N = parseInt(prompt("Введите размер квадратной матрицы:"));
+    let matrix = [];
+
+    for (let i = 0; i < N; i++) {
+        matrix.push([]);
+        for (let j = 0; j < N; j++) {
+            matrix[i][j] = parseInt(prompt(`Введите элемент матрицы для позиции (${i}, ${j}):`));
+        }
+    }
+
+    let rowSum = 0;
+    let colSum = 0;
+    let diagSum1 = 0;
+    let diagSum2 = 0;
+
+    for (let i = 0; i < N; i++) {
+        rowSum = 0;
+        colSum = 0;
+        diagSum1 += matrix[i][i];
+        diagSum2 += matrix[N - 1 - i][i];
+        for (let j = 0; j < N; j++) {
+            rowSum += matrix[i][j];
+            colSum += matrix[j][i];
+        }
+        if (rowSum !== colSum || rowSum !== diagSum1 || rowSum !== diagSum2) {
+            console.log("Матрица не является волшебной.");
+            break;
+        }
+        if (i === N - 1) {
+            console.log("Матрица является волшебной.");
+        }
+    }
+
+
+    </script>
+     
+    
+</body>
+</html>

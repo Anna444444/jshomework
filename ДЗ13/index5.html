@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание5</title>
+</head>
+<body>
+
+<!-- 5.	Создать квадратную матрицу N х N со случайными числами от -10 до 10. Найти сумму отрицательных элементов под главной диагональю и сумму положительных элементов над главной диагональю. Сравнить их по модулю и вывести результат сравнения.-->
+
+    <script>
+
+    let N = 5;
+    let matrix = [];
+
+    for (let i = 0; i < N; i++) {
+        matrix.push([]);
+        for (let j = 0; j < N; j++) {
+            matrix[i][j] = Math.floor(Math.random() * 21) - 10;
+        }
+    }
+
+    let sumNegativeBelow = 0;
+    let sumPositiveAbove = 0;
+
+    for (let i = 1; i < N; i++) {
+        for (let j = 0; j < i; j++) {
+            if (matrix[i][j] < 0) {
+            sumNegativeBelow += matrix[i][j];
+            } else if (matrix[j][i] > 0) {
+            sumPositiveAbove += matrix[j][i];
+            }
+        }
+    }
+
+    let absSumNegativeBelow = Math.abs(sumNegativeBelow);
+    let absSumPositiveAbove = Math.abs(sumPositiveAbove);
+
+    if (absSumNegativeBelow > absSumPositiveAbove) {
+        console.log(`Сумма отрицательных элементов под главной диагональю больше суммы положительных элементов над главной диагональю на ${absSumNegativeBelow - absSumPositiveAbove}`);
+        } else if (absSumNegativeBelow < absSumPositiveAbove) {
+            console.log(`Сумма положительных элементов над главной диагональю больше суммы отрицательных элементов под главной диагональю на ${absSumPositiveAbove - absSumNegativeBelow}`);
+            } else {
+                console.log("Сумма отрицательных элементов под главной диагональю равна сумме положительных элементов над главной диагональю");
+                }
+
+    </script>
+
+     
+    
+</body>
+</html>
