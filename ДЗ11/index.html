@@ -39,7 +39,13 @@
                 const mealLength = meal.length;
                 this.size += mealLength;
                 this.weight += mealLength;
+               
+                if (animal === this) {
+                console.log(`${this.name} не может есть самого себя.`);
+                return;
             }
+            }
+            
         }
 
         class Herbivore extends Animal {
@@ -56,6 +62,10 @@
                 } else {
                     console.log(`${this.name} не может есть ${meal}.`);
                 }
+                if (animal === this) {
+                console.log(`${this.name} не может есть самого себя.`);
+                return;
+            }
             }
         }
 
