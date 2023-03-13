@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+<!-- Пользователь вводит строку в формате JSON. Используя метод JSON.parse() выведите информацию из введённого JSON-объекта в документ. Например, для объекта {id: 35, name: 'Robert', married: true} вывод будет такой:
+
+ключ: 'id', значение: 35, тип: number;
+ключ: 'name', значение: 'Robert', тип: string;
+Ключ: 'married', значение: true, тип: boolean;
+
+Пользователь может ввести некорректный JSON, предусмотрите понятный пользователю вывод для такого случая тоже.
+-->
+
+
+    <script>
+
+        let jsonString = prompt("Введите строку в формате JSON: ");
+        
+            try {
+                let jsonObj = JSON.parse(jsonString);
+                for (let key in jsonObj) {
+                    document.write(`Ключ: '${key}', значение: ${jsonObj[key]}, тип: ${typeof jsonObj[key]};<br>`);
+                }
+            } catch (e) {
+                document.write("Введенная строка не является корректным JSON.");
+            }
+
+
+        // {"имя": "Анна", "возраст": 35, "город": "Алматы"}
+
+        
+    
+    </script>
+
+     
+    
+</body>
+</html>
