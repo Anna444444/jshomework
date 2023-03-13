@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание1</title>
+</head>
+<body>
+
+<!-- 1.	Предприятие выпускает X видов продукции, используя Y типов сырья. X и Y вводит пользователь. Пользователь также вводит массив – план выпуска продукции. Используя класс Matrix, сгенерируйте и выведите в документ матрицы производства, матрицы стоимости сырья. Посчитайте и выведите матрицу затрат на виды продукции и общую сумму затрат на сырьё для реализации плана производства.-->
+
+    <script>
+
+      class Matrix {
+        constructor(rows, cols) {
+          this.rows = rows;
+          this.cols = cols;
+          this.data = [];
+
+          for (let i = 0; i < this.rows; i++) {
+            this.data[i] = [];
+            for (let j = 0; j < this.cols; j++) {
+              this.data[i][j] = 0;
+            }
+          }
+        }
+
+        static multiply(a, b) {
+          if (a.cols !== b.rows) {
+            console.error('Columns of A must match rows of B');
+            return;
+          }
+
+          let result = new Matrix(a.rows, b.cols);
+
+          for (let i = 0; i < result.rows; i++) {
+            for (let j = 0; j < result.cols; j++) {
+              let sum = 0;
+              for (let k = 0; k < a.cols; k++) {
+                sum += a.data[i][k] * b.data[k][j];
+              }
+              result.data[i][j] = sum;
+            }
+          }
+
+          return result;
+        }
+
+        print() {
+          console.table(this.data);
+        }
+      }
+
+      let X = parseInt(prompt('Введите количество видов продукции: '));
+      let Y = parseInt(prompt('Введите количество типов сырья: '));
+
+      let A = new Matrix(X, Y);
+      console.log('Матрица производства:');
+      for (let i = 0; i < X; i++) {
+        for (let j = 0; j < Y; j++) {
+          A.data[i][j] = parseInt(prompt(`Введите количество сырья ${j+1} для производства продукта ${i+1}: `));
+        }
+      }
+      A.print();
+
+      let C = new Matrix(Y, 1);
+      console.log('Матрица стоимости сырья:');
+      for (let i = 0; i < Y; i++) {
+        C.data[i][0] = parseInt(prompt(`Введите стоимость сырья ${i+1}: `));
+      }
+      C.print();
+
+      let B = new Matrix(1, X);
+      console.log('Матрица плана выпуска продукции:');
+      for (let i = 0; i < X; i++) {
+        B.data[0][i] = parseInt(prompt(`Введите план выпуска продукта ${i+1}: `));
+      }
+      B.print();
+
+      let Z = Matrix.multiply(B, A);
+      console.log('Матрица затрат на виды продукции:');
+      Z.print();
+
+      let P = Matrix.multiply(Matrix.multiply(B, A), C);
+      console.log(`Общая стоимость сырья: ${P.data[0][0]}`);
+
+
+    </script>
+
+     
+    
+</body>
+</html>
