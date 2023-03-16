@@ -24,56 +24,42 @@
 
     <script>
 
-        let words = ['брод','пальто','гриб','музыка','лес', 'кожа'];
-        let matrix = [
-        ['д', 'г', 'р', 'и', 'б', 'о', 'ы', 'б'],
-        ['л', 'а', 'г', 'м', 'а', 'н', 'э', 'р'],
-        ['е', 'г', 'п', 'а', 'л', 'ь', 'т', 'о'],
-        ['с', 'м', 'у', 'з', 'ы', 'к', 'а', 'д'],
-        ['л', 'т', 'р', 'и', 'к', 'о', 'ж', 'а']
-        ];
+        let words = ['брод', 'пальто', 'гриб', 'музыка', 'лес', 'кожа'];
+        let matrix = [  ['д', 'г', 'р', 'и', 'б', 'о', 'ы', 'б'],
+                        ['л', 'а', 'г', 'м', 'а', 'н', 'э', 'р'],
+                        ['е', 'г', 'п', 'а', 'л', 'ь', 'т', 'о'],
+                        ['с', 'м', 'у', 'з', 'ы', 'к', 'а', 'д'],
+                        ['л', 'т', 'р', 'и', 'к', 'о', 'ж', 'а']
+                        ];
 
-        function findWordsInMatrix(words, matrix) {
-        let result = [];
-
-        for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < matrix[i].length; j++) {
-                let wordRight = matrix[i].slice(j).join('');
-                let wordDown = matrix.map(row => row[j]).slice(i).join('');
-
-                if (words.includes(wordRight)) {
-                    result.push(`${wordRight} - строка ${i + 1}, столбец ${j + 1}: слева направо`);
+        function findWords(matrix, words) {
+            for (let i = 0; i < matrix.length; i++) {
+                let row = matrix[i].join('');
+                for (let j = 0; j < words.length; j++) {
+                if (row.includes(words[j])) {
+                    let colIndex = row.indexOf(words[j]);
+                    console.log(`${words[j]} - строка ${i + 1}, столбец ${colIndex + 1}: слева направо`);
                 }
-
-                if (words.includes(wordDown)) {
-                    result.push(`${wordDown} - строка ${i + 1}, столбец ${j + 1}: сверху вниз`);
                 }
             }
-        }
 
-        for (let i = matrix.length - 1; i >= 0; i--) {
-            for (let j = matrix[i].length - 1; j >= 0; j--) {
-                let wordLeft = matrix[i].slice(0, j + 1).reverse().join('');
-                let wordUp = matrix.map(row => row[j]).slice(0, i + 1).reverse().join('');
-
-                if (words.includes(wordLeft)) {
-                    result.push(`${wordLeft} - строка ${i + 1}, столбец ${j + 1}: справа налево`);
+            for (let i = 0; i < matrix[0].length; i++) {
+                let col = '';
+                for (let j = 0; j < matrix.length; j++) {
+                col += matrix[j][i];
                 }
-
-                if (words.includes(wordUp)) {
-                    result.push(`${wordUp} - строка ${i + 1}, столбец ${j + 1}: снизу вверх`);
+                for (let j = 0; j < words.length; j++) {
+                if (col.includes(words[j])) {
+                    let rowIndex = col.indexOf(words[j]);
+                    console.log(`${words[j]} - строка ${rowIndex + 1}, столбец ${i + 1}: сверху вниз`);
+                }
                 }
             }
-        }
+            }
 
-        return result;
-        }
-
-        let foundWords = findWordsInMatrix(words, matrix);
-        document.write(foundWords);
+            findWords(matrix, words);
 
 
-    
     </script>
 
      
