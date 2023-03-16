@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание</title>
+</head>
+<body>
+
+<!-- 1. Есть код функции, возвращающий разницу между двумя датами в строковом виде.
+    function getDateDifference(date1, date2) {
+        if (!(date1 instanceof Date) || !(date2 instanceof Date)) {
+            throw new Error("Invalid arguments");
+            return;
+        }
+        let diff = new Date(date2 - date1);
+        let years = diff.getFullYear() - 1970;
+        let months = diff.getMonth();
+        let days = diff.getDate();
+        
+        return `${years} лет, ${months} месяцев, ${days} дней`;
+    }
+    Нужно:
+    а) найти ошибку в функции: почему разница между датами "2023-03-01" и "2023-05-03" составляет 2 месяца и 5 дней, вместо очевидных 2 месяцев и 2 дней.
+    б) исправить функцию, чтобы она работала правильно.
+-->
+
+
+    <script>
+
+        let getDateDifference = (date1, date2) => {
+            if (!(date1 instanceof Date) || !(date2 instanceof Date)) {
+                throw new Error("Invalid arguments");
+            }
+
+            let differenceMilliseconds = date2.getTime() - date1.getTime();
+
+            let dayMilliseconds = 1000 * 60 * 60 * 24;
+            let monthMilliseconds = dayMilliseconds * 30.436875;
+            let yearMilliseconds = dayMilliseconds * 365.25;
+
+            if (differenceMilliseconds < 0) {
+                differenceMilliseconds = -differenceMilliseconds;
+                [date1, date2] = [date2, date1];
+            }
+
+            let years = Math.floor(differenceMilliseconds / yearMilliseconds);
+            let months = Math.floor((differenceMilliseconds % yearMilliseconds) / monthMilliseconds);
+            let days = Math.floor((differenceMilliseconds % monthMilliseconds) / dayMilliseconds);
+
+            return { years, months, days };
+        };
+
+
+    </script>
+
+     
+    
+</body>
+</html>
