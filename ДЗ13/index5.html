@@ -12,39 +12,75 @@
 
     <script>
 
-    let N = 5;
-    let matrix = [];
-
-    for (let i = 0; i < N; i++) {
-        matrix.push([]);
-        for (let j = 0; j < N; j++) {
-            matrix[i][j] = Math.floor(Math.random() * 21) - 10;
+        function createRandomMatrix(N) {
+            let matrix = [];
+            for (let i = 0; i < N; i++) {
+                let row = [];
+                for (let j = 0; j < N; j++) {
+                    row.push(Math.floor(Math.random() * 21) - 10);
+                }
+                matrix.push(row);
+            }
+            return matrix;
         }
-    }
 
-    let sumNegativeBelow = 0;
-    let sumPositiveAbove = 0;
+        function sumNegativeBelowDiagonal(matrix) {
+            let sum = 0;
+            for (let i = 1; i < matrix.length; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (matrix[i][j] < 0) {
+                        sum += matrix[i][j];
+                    }
+                }
+            }
+            return sum;
+        }
 
-    for (let i = 1; i < N; i++) {
-        for (let j = 0; j < i; j++) {
-            if (matrix[i][j] < 0) {
-            sumNegativeBelow += matrix[i][j];
-            } else if (matrix[j][i] > 0) {
-            sumPositiveAbove += matrix[j][i];
+        function sumPositiveAboveDiagonal(matrix) {
+            let sum = 0;
+            for (let i = 0; i < matrix.length - 1; i++) {
+                for (let j = i + 1; j < matrix.length; j++) {
+                    if (matrix[i][j] > 0) {
+                        sum += matrix[i][j];
+                    }
+                }
+            }
+            return sum;
+        }
+
+        function compareSums(N) {
+            let matrix = createRandomMatrix(N);
+            console.log("Матрица:");
+            console.table(matrix);
+            let negativeSum = sumNegativeBelowDiagonal(matrix);
+            let positiveSum = sumPositiveAboveDiagonal(matrix);
+            console.log("Сумма отрицательных элементов под главной диагональю: " + negativeSum);
+            console.log("Сумма положительных элементов над главной диагональю: " + positiveSum);
+            let absoluteNegativeSum = Math.abs(negativeSum);
+            let absolutePositiveSum = Math.abs(positiveSum);
+            if (absoluteNegativeSum > absolutePositiveSum) {
+                console.log("Сумма отрицательных элементов под главной диагональю больше по модулю.");
+            } else if (absoluteNegativeSum < absolutePositiveSum) {
+                console.log("Сумма положительных элементов над главной диагональю больше по модулю.");
+            } else {
+                console.log("Сумма отрицательных элементов под главной диагональю равна по модулю сумме положительных элементов над главной диагональю.");
             }
         }
-    }
 
-    let absSumNegativeBelow = Math.abs(sumNegativeBelow);
-    let absSumPositiveAbove = Math.abs(sumPositiveAbove);
 
-    if (absSumNegativeBelow > absSumPositiveAbove) {
-        console.log(`Сумма отрицательных элементов под главной диагональю больше суммы положительных элементов над главной диагональю на ${absSumNegativeBelow - absSumPositiveAbove}`);
-        } else if (absSumNegativeBelow < absSumPositiveAbove) {
-            console.log(`Сумма положительных элементов над главной диагональю больше суммы отрицательных элементов под главной диагональю на ${absSumPositiveAbove - absSumNegativeBelow}`);
-            } else {
-                console.log("Сумма отрицательных элементов под главной диагональю равна сумме положительных элементов над главной диагональю");
+
+        function test_createRandomMatrix() {
+            let N = 3;
+            let matrix = createRandomMatrix(N);
+            console.assert(matrix.length === N, `Expected matrix size: ${N}, but got: ${matrix.length}`);
+            for (let i = 0; i < N; i++) {
+                console.assert(matrix[i].length === N, `Expected row size: ${N}, but got: ${matrix[i].length}`);
+                for (let j = 0; j < N; j++) {
+                    console.assert(matrix[i][j] >= -10 && matrix[i][j] <= 10, `Expected value in range [-10, 10], but got: ${matrix[i][j]}`);
                 }
+            }
+        }
+
 
     </script>
 
