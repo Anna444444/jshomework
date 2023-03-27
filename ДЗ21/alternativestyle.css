@@ -1,0 +1,13 @@
+#palette {
+  display: flex;
+}
+td {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+}
+#selectedColor {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
