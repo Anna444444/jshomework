@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+#test-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px;
+    background-color: #e5bfda;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#test-container h1{
+    color: rgb(93, 50, 84);
+}
+#test-container p{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+#start-test {
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: #8f6a85;
+    color: white;
+    font-weight: 600;
+}
