@@ -1,0 +1,50 @@
+h1 {
+    color: rgb(223, 113, 24);
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 38px;
+}
+h3 {
+    font-size: 22px;
+}
+img {
+    width: 15%;
+}
+div.super-store-item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 250px;
+    background-color: rgb(233, 174, 78);
+    margin-top: 10px;
+}
+button {
+    height: 50px;
+    width: 136px;
+    border-radius: 15px;
+    background-color: rgb(244, 225, 48);
+    font-size: 18px;
+}
+.item-image {
+    transition: transform 0.3s ease;
+  }
+  
+.item-image.zoomed {
+    transform: scale(2);
+    z-index: 10;
+  }
+
+.item-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.item-description.expanded {
+  max-height: 500px;
+  width: 180px;
+}
+p {
+    font-size: 22px;
+    font-weight: bold;
+}
