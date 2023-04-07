@@ -11,16 +11,9 @@ function handleCollisions() {
       let dx = ballCenterX - playerCenterX;
       let dy = ballCenterY - playerCenterY;
       let angle = Math.atan2(dy, dx);
-      let distance = ball.clientWidth / 2 + player1.clientWidth / 2;  // VN: этот множитель на самом деле определяет силу
-                                                                      // отскока мяча, поэтому я назвал бы его force, и
-                                                                      // задал бы ему просто константное значение.
-                                                                      // Сейчас он получается равен 50, и это маловато.
-
-      //ball.style.left = (playerCenterX + Math.cos(angle) * distance - ball.clientWidth / 2) + 50 + "px";
-      //ball.style.top = (playerCenterY + Math.sin(angle) * distance - ball.clientHeight / 2) + 50 + "px";
-      //                                                         вся проблема в этом слагаемом ^^^^
-      ball.style.left = (playerCenterX + Math.cos(angle) * distance - ball.clientWidth / 2) + "px";
-      ball.style.top = (playerCenterY + Math.sin(angle) * distance - ball.clientHeight / 2) + "px";
+      const farce = 200;
+      ball.style.left = (playerCenterX + Math.cos(angle) * farce - ball.clientWidth / 2) + "px";
+      ball.style.top = (playerCenterY + Math.sin(angle) * farce - ball.clientHeight / 2) + "px";
     }
     if (ball.offsetLeft + ball.clientWidth > player2.offsetLeft && ball.offsetLeft < player2.offsetLeft + player2.clientWidth && ball.offsetTop + ball.clientHeight > player2.offsetTop && ball.offsetTop < player2.offsetTop + player2.clientHeight) {
       let ballCenterX = ball.offsetLeft + ball.clientWidth / 2;
@@ -30,9 +23,9 @@ function handleCollisions() {
       let dx = ballCenterX - playerCenterX;
       let dy = ballCenterY - playerCenterY;
       let angle = Math.atan2(dy, dx);
-      let distance = ball.clientWidth / 2 + player2.clientWidth / 2;
-      ball.style.left = (playerCenterX + Math.cos(angle) * distance - ball.clientWidth / 2) + 50 + "px";
-      ball.style.top = (playerCenterY + Math.sin(angle) * distance - ball.clientHeight / 2) + 50 + "px";
+      const farce = 200;
+      ball.style.left = (playerCenterX + Math.cos(angle) * farce - ball.clientWidth / 2) + "px";
+      ball.style.top = (playerCenterY + Math.sin(angle) * farce - ball.clientHeight / 2) + "px";
     }
   }
 
@@ -58,13 +51,14 @@ let moveBall = (ev) => {
 }
 
 function movePlayer1(e){
-     
+    const screenHeight = window.screen.height 
     var player1 = document.getElementById("football1");
     var cs = window.getComputedStyle(player1);
-     
+    // alert(screenHeight)
     var left = parseInt(cs.marginLeft);
     var top = parseInt(cs.marginTop);
-     
+    // var bottom = parseInt(cs.marginBottom); 
+
     switch(e.key){
 		case "ArrowLeft":
         if(left>-244)
@@ -80,10 +74,7 @@ function movePlayer1(e){
         player1.style.marginLeft = left + 50 + "px";
         break;
         case "ArrowDown":
-            if(top < 450)   // VN: судя по всему, у меня размер экрана(поля) не такой, как у вас, поэтому игрок
-                            // встречает невидимую стену и ниже двигаться не может, хотя там ещё 1/4 поля.
-                            // Эти граничные значения нужно достать из текущего положения и размера поля на странице.
-                            // !! Места, где в коде встречаются явные цифры, обычно являются источниками разных глюков.
+            // if(top <= screenHeight)
                 player1.style.marginTop = top + 50 + "px";
             break;
     }
