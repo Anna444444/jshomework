@@ -39,7 +39,7 @@ function animate() {
 }
 
 animate();
-
+// 
 let moveBall = (ev) => {
 	let ball = document.getElementById('ball');
 
