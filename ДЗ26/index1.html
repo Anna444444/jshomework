@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='style1.css' rel='stylesheet' type='text/css'>
+	<title>Document</title>
+</head>
+<body>
+
+    <h1>Палитра цветов</h1>
+    <div class="colors"></div>
+    <form id="color-form">
+        <label for="name">Color:</label>
+        <input type="text" id="name" required pattern="[A-Za-zА-Яа-я]+">
+        <div class="error" id="name-error"></div>
+        <br>
+        <label for="type">Type:</label>
+        <select id="type">
+            <option value="RGB">RGB</option>
+            <option value="RGBA">RGBA</option>
+            <option value="HEX">HEX</option>
+        </select>
+        <br>
+        <label for="code">Code:</label>
+        <input type="text" id="code" required>
+        <div class="error" id="code-error"></div>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+
+</body>
+<script src='index1.js'></script>
+</html>
+	
