@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+}
+table {
+    width: 56%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #124150;
+    padding: 15px 20px;
+    text-align: left;
+}
+th {
+    background-color: #bedfe0;
+}
+button {
+    margin: 10px 0;
+}
+#search {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 2px solid #124150;
+    border-radius: 4px;
+}
+#new-contact {
+    background-color: rgb(153, 204, 204);
+    padding: 10px 20px;
+    border-radius: 4px; 
+}
+#export {
+    background-color: rgb(153, 204, 204);
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+#import {
+    background-color: rgb(153, 204, 204);
+    padding: 10px 20px;
+    border-radius: 4px;
+}

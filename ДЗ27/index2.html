@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <input type="text" id="search" placeholder="Поиск контактов">
+    <table id="contacts">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Мобильный телефон</th>
+                <th>Городской телефон</th>
+                <th>Адрес</th>
+            </tr>
+        </thead>
+        <tbody id="contacts-body">
+        </tbody>
+    </table>
+    <button id="new-contact">Новый контакт</button>
+    <button id="export">Экспорт</button>
+    <button id="import">Импорт</button>
+    <input type="file" id="import-file" accept="text/csv" style="display:none;">
+
+    <div id="contact-form" style="display:none;">
+        <input type="text" id="name" placeholder="Имя">
+        <input type="text" id="mobile" placeholder="Мобильный телефон">
+        <input type="text" id="city-phone" placeholder="Городской телефон">
+        <input type="text" id="address" placeholder="Адрес">
+        <button id="cancel">Отмена</button>
+        <button id="save">Сохранить</button>
+    </div>
+
+
+
+
+<script src="script2.js"></script>
+
+    
+</body>
+</html>
+
+
