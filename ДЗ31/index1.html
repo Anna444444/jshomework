@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='ru'>
+<head>
+	<meta charset='utf-8'>
+	<link href='index1.css' rel='stylesheet' type='text/css'>
+	<title>Кофемашина</title>
+</head>
+<body>
+
+    <div class="coffee-machine">
+        <div class="display">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="message"></div>
+        </div>
+        <div class="payment">
+            <img src="img/QR.png" class="qr-code" alt="QR-код">
+            <button class="pay-btn">Оплатить</button>
+            <div class="paid-amount"></div>
+        </div>
+        <div class="coin-slot">
+            <img src="img/coin.png" class="coin" alt="Монета">
+        </div>
+        <div class="coffee-zone">
+            <img src="img/cup.png" class="cup swing-animation" alt="Стаканчик">
+        </div>
+        <div class="change-btn">Вернуть сдачу</div>
+        <div class="change-tray">
+            <img src="img/coin.png" class="returned-coin" alt="Монета сдачи">
+        </div>
+        <div class="drink-options">
+            <button class="drink-btn" data-name="Эспрессо" data-price="100">Эспрессо</button>
+            <button class="drink-btn" data-name="Американо" data-price="150">Американо</button>
+            <button class="drink-btn" data-name="Капучино" data-price="200">Капучино</button>
+            <button class="drink-btn" data-name="Латте" data-price="250">Латте</button>
+            <button class="drink-btn" data-name="Раф" data-price="300">Раф</button>
+        </div>
+    </div>
+
+</body>
+<script src='index1.js'></script>
+</html>

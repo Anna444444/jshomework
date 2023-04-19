@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+.coffee-machine {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 600px;
+  background-color: #c0c0c0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.display {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+.progress-bar {
+  position: relative;
+  background-color:#808080;
+  height: 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #81fa81;
+  width: 0%;
+}
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.qr-code {
+  width: 80px;
+  height: 80px;
+  display: none;
+}
+.pay-btn {
+  display: none;
+  margin-top: 10px;
+}
+.paid-amount {
+  color: #000;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.coin-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #606060;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.coin {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.coffee-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.cup {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+.change-btn {
+  background-color: #808080;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.change-tray {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #606060;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.returned-coin {
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+.drink-options {
+  display: flex;
+  justify-content: space-between;
+}
+.drink-btn {
+  background-color: #808080;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:enabled:hover {
+  background-color: #2ddd0a;
+  color: white;
+  cursor: pointer;
+}
+.swing-animation {
+  animation: swing 1s infinite alternate;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
