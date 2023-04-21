@@ -1,0 +1,44 @@
+  #input {
+    display: block;
+    width: 50%;
+    max-width: 50%;
+    min-width: 50%;
+    height: 200px;
+    max-height: 200px;
+    min-height: 200px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+button {
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+code {
+    font-family: monospace;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    width: 50%;
+    margin: 0 auto;
+    height: 200px;
+}
+
+  
+
