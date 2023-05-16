@@ -1,0 +1,16 @@
+Домашнее задание: Single Page Web Application
+
+1. Дополните класс Discord методами: getUserGuilds(), getGuild() и getGuildChannels(), по аналогии с существующим методом getUser().
+   Необходимые endpoinds найдите в документации Discord API: https://discord.com/developers/docs/intro
+
+2. В классе Cdn реальзуйте методы для получения:
+    * guild icon url;
+    * guild splash url;
+    * guild banner url;
+    * guild member avatar url;
+    * guild member banner url;
+    * user banner url;
+    * emoji url;
+    * sticker url.
+    Схемы построения url найдёте здесь: https://discord.com/developers/docs/reference#image-formatting
+    

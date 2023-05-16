@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    background-color: #282b30;
+    color: white;
+}
+#login {
+    display: none;
+    padding: 15px;
+}
+#main {
+    display: none;
+    padding: 15px;
+}
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #7289da;
+    color: #fff;
+}
+div {
+    padding-left: 20px;
+}
+.user-info img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.user-info h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+.user-info p {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #999;
+}
+.user-info span {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #999;
+}
+.user-details {
+    display: flex;
+    flex-direction: column;
+    background-color: #7289da;
+}
+.username {
+    background-color: #7289da;
+    font-size: 20px;
+    color: black;
+}
+.user-id {
+    background-color: #7289da;
+    font-size: 20px;
+    color: black
+}
+.guild-img img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.message-list {
+    padding: 20px;
+}
+.message-list h2 {
+    margin-bottom: 10px;
+}
+.message-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.message-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+.message-user {
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 15%;
+}
+.message-content {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    width: 82%;
+    background-color: #424549;
+}
+.message-input {
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    background-color: #282b30;
+}
+.message-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    background-color: #424549;
+}
+.message-input button {
+    background-color: #7289da;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.service-info {
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+.service-info p {
+    margin-bottom: 10px;
+}
+.service-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.service-info li {
+    display: inline-block;
+    margin-right: 10px;
+}
+.service-info li a {
+    color: #7289da;
+    text-decoration: none;
+}
+.service-info li a:hover {
+    text-decoration: underline;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* список гильдий */
+.guild-list {
+    margin-bottom: 20px;
+}
+.guild-list h2 {
+    margin-bottom: 10px;
+}
+.guild-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.guild-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.guild-list img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.guild-list a {
+    color: #333;
+    text-decoration: none;
+}
+.guild-list a:hover {
+    text-decoration: underline;
+}
+/* список каналов */
+.channel-list {
+    margin-bottom: 20px;
+}
+.channel-list h2 {
+    margin-bottom: 10px;
+}
+.channel-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.channel-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.channel-list a {
+    color: #333;
+    text-decoration: none;
+}
+.channel-list a:hover {
+    text-decoration: underline;
+}
+/* список сообщений */
+.message-avatar {
+    margin-right: 10px;
+}
+.message-form {
+    display: flex;
+    margin-bottom: 20px;
+}
+.message-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.message-form button[type="submit"] {
+    padding: 10px;
+    background-color: #7289da;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.message-form button[type="submit"]:hover {
+    background-color: #5b6eae;
+}
