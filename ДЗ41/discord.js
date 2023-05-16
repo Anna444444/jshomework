@@ -1,6 +1,6 @@
 export class Discord {
     static authUrl = "https://discord.com/api/oauth2/authorize?client_id=1105800825864998932&redirect_uri=http%3A%2F%2Flocalhost%3A52331%2Fmain.html&response_type=code&scope=identify%20guilds%20messages.read%20guilds.members.read";
-    #clientId = "1105800744759738390";
+    #clientId = "1105800825864998932";
     #clientSecret = "KeYtYTNvvQPrN2o9pRsogsstiBhYXjs6";
     #apiUrl = 'https://discord.com/api/v10';
     #token = null;
