@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <link href='map.css' rel='stylesheet' type='text/css'>
+        <title>Black Jack</title>
+</head>
+<body>
+
+        <div id="game-container">
+                <h1>Black Jack</h1>
+                <div id="game-score"></div>
+                <div id="opponent">
+                        <h2>Противник</h2>
+                        <img id="opponent-avatar" src="img/images.jpg" alt="Opponent Avatar">
+                        <div id="opponent-score"></div>
+                        <div id="opponent-cards"></div>
+                </div>
+                <div id="table">
+                        <h2>Вы</h2>
+                        <div id="user">
+                                <img id="user-avatar" src="img/images1.jpg" alt="User Avatar">
+                                <div id="user-cards"></div>
+                                <div id="user-score"></div>
+                        </div>
+                        <div id="controls">
+                                <button id="btn-start">Начать игру</button>
+                                <button id="btn-hit" disabled>Взять карту</button>
+                                <button id="btn-stand" disabled>Стоп</button>
+                        </div>
+                </div>
+        </div>
+
+        <div id="modal" class="modal">
+                <div class="modal-content">
+                        <span id="modal-close" class="modal-close">&times;</span>
+                        <h2 id="modal-score">Score: 0</h2>
+                        <p id="modal-result">Result</p>
+                        <button id="modal-next">Следующая партия</button>
+                </div>
+        </div>
+
+
+        <script src='map.js'></script>
+
+</body>
+</html>
