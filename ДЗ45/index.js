@@ -1,48 +1,70 @@
 $(document).ready(function() {
-    var leftBlockVisible = true;
+    let leftBlockVisible = true;
   
-    $('.arrow').click(function() {
+    $('#arrow-left').click(function() {
+      let cont1 = $('.cont1');
+      let arrow = $(this);
       if (leftBlockVisible) {
-        $('.left-block').animate({ width: '0' }, 300);
-        $(this).toggleClass('arrow-right arrow-left');
+        cont1.animate({ width: '0%' }, 300);
+        arrow.toggleClass('arrow-right arrow-left');
       } else {
-        $('.left-block').animate({ width: '100%' }, 300);
-        $(this).toggleClass('arrow-right arrow-left');
+        cont1.animate({ width: '28%' }, 300);
+        arrow.toggleClass('arrow-right arrow-left');
       }
       leftBlockVisible = !leftBlockVisible;
     });
   
-    var containerHeight = $('.display').height();
-    var minBlockHeight = 100;
-    var sliderDragging = false;
-    var prevY;
+    const minBlockHeight = 100;
+    let sliderFirstDragging = false;
+    let sliderSecondDragging = false;
+    let prevY;
   
-    $('.slider').mousedown(function(e) {
+    function handleMouseDown(e) {
       e.preventDefault();
-      sliderDragging = true;
+      let slider = $(this);
       prevY = e.pageY;
-    });
+      if (slider.hasClass('linear1')) {
+        sliderFirstDragging = true;
+      } else if (slider.hasClass('linear2')) {
+        sliderSecondDragging = true;
+      }
+    }
   
-    $(document).mousemove(function(e) {
-      if (sliderDragging) {
-        var deltaY = e.pageY - prevY;
-        var upperBlockHeight = $('.upper-block').height();
-        var lowerBlockHeight = $('.lower-block').height();
-        var rightBlockHeight = $('.right-block').height();
-        var leftBlockHeight = $('.left-block').height();
+    function handleMouseMove(e) {
+      if (sliderFirstDragging) {
+        let deltaY = e.pageY - prevY;
+        let box3 = $('.box3');
+        let box4 = $('.box4');
+        let upperBlockHeight = box3.height();
+        let lowerBlockHeight = box4.height();
   
         if (upperBlockHeight + deltaY >= minBlockHeight && lowerBlockHeight - deltaY >= minBlockHeight) {
-          $('.upper-block').height(upperBlockHeight + deltaY);
-          $('.lower-block').height(lowerBlockHeight - deltaY);
-          $('.right-block').height(rightBlockHeight + deltaY);
-          $('.left-block').height(leftBlockHeight - deltaY);
+          box3.height(upperBlockHeight + deltaY);
+          box4.height(lowerBlockHeight - deltaY);
+          prevY = e.pageY;
+        }
+      } else if (sliderSecondDragging) {
+        let deltaY = e.pageY - prevY;
+        let box1 = $('.box1');
+        let box2 = $('.box2');
+        let rightBlockHeight = box2.height();
+        let leftBlockHeight = box1.height();
+  
+        if (leftBlockHeight + deltaY >= minBlockHeight && rightBlockHeight - deltaY >= minBlockHeight) {
+          box1.height(leftBlockHeight + deltaY);
+          box2.height(rightBlockHeight - deltaY);
           prevY = e.pageY;
         }
       }
-    });
+    }
   
-    $(document).mouseup(function() {
-      sliderDragging = false;
-    });
+    function handleMouseUp() {
+      sliderFirstDragging = false;
+      sliderSecondDragging = false;
+    }
+  
+    $('.linear1, .linear2').mousedown(handleMouseDown);
+    $(document).mousemove(handleMouseMove);
+    $(document).mouseup(handleMouseUp);
   });
   

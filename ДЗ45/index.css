@@ -1,88 +1,72 @@
 * {
-    margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body,
-html {
-    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 .container {
+    display: flex;
     width: 100%;
     height: 100%;
-    display: flex;
+}
+
+.linear1, .linear2 {
+    display: block;
+    background-color: rgba(229, 235, 244, .8);
     text-align: center;
+    color: black;
+    height: 2.6vh;
 }
 
-.menu {
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.linear-mid {
+    background-color: rgba(229, 235, 244, .8);
+    text-align: center;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-weight: bold;
+    width: 2vw;
+    height: 100vh;
 }
 
-.left-block {
-    background: rgb(105, 224, 232);
-}
-
-.right-block {
-    background: rgb(233, 89, 175);
-}
-
-.upper-block {
-    background: rgb(21, 154, 142);
-}
-
-.lower-block {
-    background: rgb(242, 73, 35);
-}
-
-.block {
-    flex-grow: 1;
+.box1 {
+    background-color: rgb(105, 224, 232);
+    width: 28vw;
+    height: 49vh;
     min-height: 100px;
-    height: 458px;
 }
 
-.slider {
-    height: 20px;
-    background: grey;
+.box2 {
+    background-color: rgb(233, 89, 175);
+    width: 28vw;
+    height: 48.4vh;
+    min-height: 100px;
 }
 
-.display {
-    flex-grow: 1;
-    position: relative;
-    background: #000;
+.box3 {
+    background-color: rgb(21, 154, 142);
+    height: 69vh;
+    min-height: 100px;
 }
 
-.vert-slider {
-    height: 100%;
-    width: 20px;
-    background: lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.arrow {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%);
-    background: gray;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-    font-size: 20px;
+.box4 {
+    background-color: rgb(242, 73, 35);
+    height: 28.4vh;
+    min-height: 100px;
 }
 
 .arrow-right {
-    transform: translate(-50%, -50%) rotate(180deg);
+    transform: translate(0%, 0%) rotate(180deg);
+    cursor: pointer;
+}
+
+.cont1 {
+    width: 28%
+}
+
+.cont2 {
+    width: 100%;
+}
+
+#arrow-left {
+    cursor: pointer;
 }
